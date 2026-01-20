@@ -101,13 +101,26 @@ st.markdown(f"""
         color: white !important;
         animation: moveBackground 30s ease-in-out infinite; /* 30 segundos para que sea muy sutil */
     }}
-    .social-header {{ position: absolute; top: 10px; right: 30px; display: flex; gap: 20px; z-index: 999; align-items: center; }}
-    .cv-title {{ position: absolute; top: 10px; left: 30px; color: white; font-weight: bold; font-size: 18px; z-index: 999; }}
+    .social-header {{ 
+        display: flex; 
+        justify-content: center; 
+        gap: 20px; 
+        flex-wrap: wrap; 
+        margin-top: 10px;
+    }}
+    .cv-title {{ 
+        text-align: center; 
+        color: white; 
+        font-weight: bold; 
+        font-size: 18px; 
+        margin-bottom: 10px;
+    }}
     .icon-white {{ width: 30px; filter: brightness(0) invert(1); transition: transform 0.3s ease; }}
     .icon-white:hover {{ transform: scale(1.3); filter: brightness(0) invert(1) drop-shadow(0 0 10px #00f2ff); }}
     .profile-pic {{
         width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
-        border: 4px solid #00f2ff; box-shadow: 0 0 20px #00f2ff; display: block; margin: auto;
+        border: 4px solid #00f2ff; box-shadow: 0 0 20px #00f2ff; 
+        display: block; margin: 20px auto; /* Asegura que esté centrado y con espacio */
     }}
     .perfil-texto {{ 
         max-width: 850px; margin: 20px auto; text-align: center; font-size: 18px; color: white; 
@@ -178,7 +191,6 @@ st.markdown(f"""
 
 # --- 6. NAVEGACIÓN Y HEADER ---
 st.markdown(f"""
-<div class="cv-title">Mi Curriculum Vitae</div>
 <div class="social-header">
     <a href="https://www.linkedin.com/in/carlos-e-soto-v%C3%A1squez-8366b3241" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" style="width:30px;" class="icon-color-hover">
