@@ -288,7 +288,7 @@ st.markdown(f"""
 if perfil_img:
     st.markdown(f'<img src="data:image/jpeg;base64,{perfil_img}" class="profile-pic">', unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align: center; margin-bottom: 5px; font-size: clamp(22px, 6vw, 40px);'>CARLOS ENRIQUE SOTO VÁSQUEZ</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; margin-bottom: 5px; font-size: clamp(22px, 6vw, 40px);'>CARLOS E. SOTO VÁSQUEZ</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #00f2ff; font-size: clamp(14px, 4vw, 22px); font-weight: bold;'>Estudiante de Ingeniería en Ciberseguridad y Auditoría Informática</p>", unsafe_allow_html=True)
 
 # --- TEXTO DE PERFIL ---
