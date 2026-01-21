@@ -96,11 +96,20 @@ st.markdown(f"""
     #MainMenu, footer {{visibility: hidden;}}
     .stApp {{
         background-image: linear-gradient(rgba(5, 10, 48, 0.95), rgba(0, 0, 0, 0.95)), url("data:image/png;base64,{bg_img}");
-        background-size: 140% 140%; /* Un poco más grande para que el movimiento sea fluido */
+        background-size: 140% 140%; 
         background-repeat: no-repeat;
         color: white !important;
-        animation: moveBackground 30s ease-in-out infinite; /* 30 segundos para que sea muy sutil */
+        animation: moveBackground 30s ease-in-out infinite;
     }}
+    
+    /* CAMBIO: Arreglo para que el fondo se vea bien en celulares */
+    @media (max-width: 640px) {{
+        .stApp {{
+            background-size: cover !important; /* Ajusta la imagen a la pantalla sin zoom excesivo */
+            background-position: center center !important; /* Centra la imagen */
+        }}
+    }}
+
     .social-header {{ 
         display: flex; 
         justify-content: center; 
@@ -118,17 +127,15 @@ st.markdown(f"""
     .icon-white {{ width: 30px; filter: brightness(0) invert(1); transition: transform 0.3s ease; }}
     .icon-white:hover {{ transform: scale(1.3); filter: brightness(0) invert(1) drop-shadow(0 0 10px #00f2ff); }}
     
-    /* CAMBIOS EN LA FOTO DE PERFIL */
     .profile-pic {{
         width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
         border: 4px solid #00f2ff; box-shadow: 0 0 20px #00f2ff; 
-        display: block; margin: 20px auto; /* Asegura que esté centrado y con espacio */
-        transition: transform 0.4s ease, box-shadow 0.4s ease; /* AGREGADO: Transición suave para el zoom y la sombra */
+        display: block; margin: 20px auto;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
     }}
-    /* AGREGADO: Efecto hover para hacer zoom */
     .profile-pic:hover {{
-        transform: scale(1.1); /* Aumenta el tamaño un 10% */
-        box-shadow: 0 0 35px #00f2ff; /* Opcional: hace que el brillo sea más intenso al pasar el mouse */
+        transform: scale(1.1);
+        box-shadow: 0 0 35px #00f2ff;
     }}
 
     .perfil-texto {{ 
@@ -137,7 +144,7 @@ st.markdown(f"""
         transition: transform 0.4s ease; 
     }}
     .perfil-texto:hover {{ 
-        transform: scale(1.05); /* Aplica el zoom del 5% */
+        transform: scale(1.05);
     }}
     @keyframes moveBackground {{
         0% {{ background-position: 0% 50%; }}
