@@ -357,4 +357,3 @@ with c2:
     
     html_habilidades = "".join([f'<span class="skill-tag" data-description="{desc}">{nombre}</span> ' for nombre, desc in habilidades.items()])
     st.markdown(html_habilidades, unsafe_allow_html=True)
-
