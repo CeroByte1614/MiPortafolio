@@ -67,7 +67,7 @@ habilidades = {
     "Gestión de Vulnerabilidades": "Identificación, clasificación y priorización de brechas mediante Nessus.",
     "Active Directory & Azure AD": "Administración avanzada de identidades, Entra ID y servicios de dominio.",
     "Networking & Protocolos": "Gestión de TCP/IP, segmentación VLANs, enrutamiento OSPF y túneles VPN SSL/IPsec.",
-    "Firewalling": "Configuración y administración de reglas de seguridad perimetral.",
+    "Firewalls": "Configuración y administración de reglas de seguridad perimetral.",
     "Linux (Ubuntu/Debian)": "Administración avanzada de sistemas, personalización de entorno y Bash scripting.",
     "Windows Server": "Gestión de infraestructura de servidores en entornos Windows.",
     "Análisis de Tráfico": "Captura y diagnóstico de paquetes de red mediante Wireshark.",
