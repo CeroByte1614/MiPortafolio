@@ -117,14 +117,24 @@ st.markdown(f"""
     }}
     .icon-white {{ width: 30px; filter: brightness(0) invert(1); transition: transform 0.3s ease; }}
     .icon-white:hover {{ transform: scale(1.3); filter: brightness(0) invert(1) drop-shadow(0 0 10px #00f2ff); }}
+    
+    /* CAMBIOS EN LA FOTO DE PERFIL */
     .profile-pic {{
         width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
         border: 4px solid #00f2ff; box-shadow: 0 0 20px #00f2ff; 
         display: block; margin: 20px auto; /* Asegura que esté centrado y con espacio */
+        transition: transform 0.4s ease, box-shadow 0.4s ease; /* AGREGADO: Transición suave para el zoom y la sombra */
     }}
+    /* AGREGADO: Efecto hover para hacer zoom */
+    .profile-pic:hover {{
+        transform: scale(1.1); /* Aumenta el tamaño un 10% */
+        box-shadow: 0 0 35px #00f2ff; /* Opcional: hace que el brillo sea más intenso al pasar el mouse */
+    }}
+
     .perfil-texto {{ 
-        max-width: 850px; margin: 20px auto; text-align: center; font-size: 18px; color: white; 
-        transition: transform 0.4s ease; /* Permite que el zoom sea fluido */
+        max-width: 850px; margin: 20px auto; text-align: center; 
+        font-size: clamp(14px, 4vw, 18px); color: white; 
+        transition: transform 0.4s ease; 
     }}
     .perfil-texto:hover {{ 
         transform: scale(1.05); /* Aplica el zoom del 5% */
@@ -193,26 +203,77 @@ st.markdown(f"""
 st.markdown(f"""
 <div class="social-header">
     <a href="https://www.linkedin.com/in/carlos-e-soto-v%C3%A1squez-8366b3241" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" style="width:30px;" class="icon-color-hover">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" class="icon-color-hover">
     </a>
     <a href="mailto:sotovasquezcarlos1614@gmail.com">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" style="width:30px;" class="icon-color-hover">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" class="icon-color-hover">
     </a>
     <a href="https://www.instagram.com/" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" style="width:30px;" class="icon-color-hover">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" class="icon-color-hover">
     </a>
     <a href="https://www.facebook.com/" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/2023_Facebook_icon.svg" style="width:30px;" class="icon-color-hover">
+        <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" class="icon-color-hover">
     </a>
 </div>
+
+<div class="header-left">Mi Portafolio</div>
+
 <style>
-    /* Nueva clase para iconos con color que mantiene el efecto de crecer */
+    .social-header {{
+        display: flex;
+        justify-content: flex-end;
+        gap: 25px;
+        padding: 10px 20px 0 0;
+        flex-wrap: wrap;
+    }}
     .icon-color-hover {{
+        width: 32px;
         transition: transform 0.3s ease;
     }}
     .icon-color-hover:hover {{
-        transform: scale(1.3);
+        transform: scale(1.2);
         filter: drop-shadow(0 0 8px rgba(0, 242, 255, 0.8));
+    }}
+    
+    /* Estilos del texto fijo arriba a la izquierda */
+    .header-left {{
+        position: fixed;
+        top: 25px;  /* CAMBIO: Ahora arriba */
+        left: 25px;
+        color: white;
+        font-weight: bold;
+        font-size: 24px; /* CAMBIO: Tamaño más grande */
+        z-index: 9999;
+        font-family: 'Segoe UI', sans-serif;
+        text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }}
+
+    /* Ajustes para móviles */
+    @media (max-width: 640px) {{
+        .social-header {{
+            justify-content: flex-end;
+            gap: 12px;
+            padding-right: 10px;
+        }}
+        .icon-color-hover {{
+            width: 24px;
+        }}
+        .profile-pic {{
+            width: 120px;
+            height: 120px; 
+            border-radius: 50%; 
+            object-fit: cover;
+            border: 3px solid #00f2ff; 
+            box-shadow: 0 0 15px #00f2ff; 
+            display: block; 
+            margin: 15px auto;
+        }}
+        /* Ajuste de posición en móvil */
+        .header-left {{
+            top: 15px; /* CAMBIO: Arriba en móvil */
+            left: 15px;
+            font-size: 18px; /* Un poco más pequeño en móvil pero legible */
+        }}
     }}
 </style>
 """, unsafe_allow_html=True)
@@ -220,16 +281,16 @@ st.markdown(f"""
 if perfil_img:
     st.markdown(f'<img src="data:image/jpeg;base64,{perfil_img}" class="profile-pic">', unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align: center; margin-bottom: 0;'>CARLOS ENRIQUE SOTO VÁSQUEZ</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #00f2ff; font-size: 22px; font-weight: bold;'>Estudiante de Ingeniería en Ciberseguridad y Auditoría Informática</p>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; margin-bottom: 5px; font-size: clamp(22px, 6vw, 40px);'>CARLOS ENRIQUE SOTO VÁSQUEZ</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #00f2ff; font-size: clamp(14px, 4vw, 22px); font-weight: bold;'>Estudiante de Ingeniería en Ciberseguridad y Auditoría Informática</p>", unsafe_allow_html=True)
 
-# --- TEXTO DE PERFIL RESTAURADO COMPLETO ---
+# --- TEXTO DE PERFIL ---
 st.markdown('<div class="perfil-texto">Estudiante de Ingeniería en Ciberseguridad con 26 años de edad cuento con más de 4 años de experiencia en soporte técnico, infraestructura TI y administración de identidades (IAM). Especializado en el endurecimiento de sistemas (Hardening), gestión de redes bajo modelo OSI y respuesta a incidentes N1/N2. Sólidos conocimientos en seguridad ofensiva y defensiva, con capacidad para implementar soluciones técnicas que aseguren la continuidad operativa y la protección de activos críticos bajo estándares de cumplimiento y SLA.</div>', unsafe_allow_html=True)
 
 st.markdown("---")
 
 # --- 7. SECCIÓN EXPERIENCIA ---
-col_prev, col_card, col_next = st.columns([1.5, 7, 1.5], vertical_alignment="center")
+col_prev, col_card, col_next = st.columns([1, 8, 1], vertical_alignment="center")
 
 with col_prev:
     st.markdown('<div style="text-align: right;">', unsafe_allow_html=True)
@@ -296,3 +357,4 @@ with c2:
     
     html_habilidades = "".join([f'<span class="skill-tag" data-description="{desc}">{nombre}</span> ' for nombre, desc in habilidades.items()])
     st.markdown(html_habilidades, unsafe_allow_html=True)
+
