@@ -28,7 +28,7 @@ icon_habilidades_img = get_base64(os.path.join(ruta_base, 'iconohabilidades.png'
 # --- 3. DATOS ---
 experiencias = [
     {
-        "titulo": "Service Desk Analyst | Vector (Salcobrand)",
+        "titulo": "Service Desk Analyst | Vector",
         "periodo": "07/2023 - Presente",
         "puntos": [
             "IAM: Administración de identidades y accesos en Azure AD (Entra ID) y Directorio Activo.",
