@@ -24,6 +24,7 @@ bg_img = get_base64('imagenciberseguridad.jpg')
 perfil_img = get_base64('imagencarlos.jpg')
 bg_card_img = get_base64('imagenciberseguridad2.jpg')
 icon_habilidades_img = get_base64(os.path.join(ruta_base, 'iconohabilidades.png'))
+img_sobre_mi = get_base64('imagensobremi.jpg')
 
 # --- 3. DATOS ---
 experiencias = [
@@ -290,15 +291,35 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 if perfil_img:
-    st.markdown(f'<div class="profile-pic" style="background-image: url(\'data:image/jpeg;base64,{perfil_img}\');"></div>', unsafe_allow_html=True)
+# --- TEXTO DE PERFIL / SOBRE MÍ ---
+st.markdown(f"""
+    <div style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 20px; margin-bottom: 25px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" width="35" height="35" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
+        <h2 style="margin: 0; color: #00f2ff; text-align: center; font-size: 32px;">Sobre Mí</h2>
+    </div>
+""", unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align: center; margin-bottom: 5px; font-size: clamp(22px, 6vw, 40px);'>CARLOS E. SOTO VÁSQUEZ</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #00f2ff; font-size: clamp(14px, 4vw, 22px); font-weight: bold;'>Estudiante de Ingeniería en Ciberseguridad y Auditoría Informática</p>", unsafe_allow_html=True)
+# Lógica para mostrar la imagen ANTES del texto
+if img_sobre_mi:
+    st.markdown(f"""
+        <div style="display: flex; justify-content: center; margin-bottom: 30px;">
+            <img src="data:image/jpeg;base64,{img_sobre_mi}" style="max-width: 90%; height: auto; max-height: 450px; border-radius: 15px; border: 2px solid #00f2ff; box-shadow: 0 0 20px rgba(0, 242, 255, 0.3); object-fit: cover;">
+        </div>
+    """, unsafe_allow_html=True)
 
-# --- TEXTO DE PERFIL ---
-st.markdown('<div class="perfil-texto">Estudiante de Ingeniería en Ciberseguridad con 26 años de edad cuento con más de 4 años de experiencia en soporte técnico, infraestructura TI y administración de identidades (IAM). Especializado en el endurecimiento de sistemas (Hardening), gestión de redes bajo modelo OSI y respuesta a incidentes N1/N2. Sólidos conocimientos en seguridad ofensiva y defensiva, con capacidad para implementar soluciones técnicas que aseguren la continuidad operativa y la protección de activos críticos bajo estándares de cumplimiento y SLA.</div>', unsafe_allow_html=True)
+# Mostrar el texto al final
+st.markdown("""
+    <div class="perfil-texto" style="font-size: 17px; line-height: 1.6; max-width: 900px; text-align: justify; padding: 25px; background: rgba(17, 34, 64, 0.6); border-radius: 15px; border: 1px solid rgba(0, 242, 255, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        Soy un joven de 25 años profundamente apasionado por la tecnología y la ciberseguridad. Actualmente me encuentro cursando mi <b>último año de la carrera de Ingeniería en Ciberseguridad y Auditoría Informática</b>. 
+        <br><br>
+        Me considero una persona proactiva y en constante aprendizaje; disfruto expandiendo mis conocimientos analíticos y técnicos, explorando siempre nuevas herramientas y metodologías dentro del mundo de la seguridad de la información. Cuando me alejo de las pantallas, <b>mi otra gran pasión es el fútbol</b>, un deporte que disfruto muchísimo y que me ayuda a mantener un buen equilibrio, liberar estrés y aplicar el valor del trabajo en equipo en mi día a día.
+        <br><br>
+        A lo largo de mi trayectoria, he consolidado más de 4 años de experiencia en soporte técnico, infraestructura TI y gestión de identidades (IAM). Me especializo en el endurecimiento de sistemas (Hardening), redes bajo el modelo OSI y respuesta a incidentes (N1/N2). Mi objetivo profesional es seguir enfrentando nuevos desafíos e implementar soluciones que protejan los activos críticos bajo los más altos estándares operativos.
+    </div>
+""", unsafe_allow_html=True)
 
-st.markdown("---")
+st.markdown("<br>", unsafe_allow_html=True)
+st.markdown("---")    
 
 # --- 7. SECCIÓN EXPERIENCIA ---
 col_prev, col_card, col_next = st.columns([1, 8, 1], vertical_alignment="center")
