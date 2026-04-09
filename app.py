@@ -28,7 +28,7 @@ icon_habilidades_img = get_base64(os.path.join(ruta_base, 'iconohabilidades.png'
 # --- 3. DATOS ---
 experiencias = [
     {
-        "titulo": "Service Desk Analyst | Vector",
+        "titulo": "Service Desk Analyst",
         "periodo": "07/2023 - Presente",
         "puntos": [
             "IAM: Administración de identidades y accesos en Azure AD (Entra ID) y Directorio Activo.",
@@ -39,16 +39,21 @@ experiencias = [
         ]
     },
     {
-        "titulo": "Soporte Técnico e Infraestructura IT | UpcomDTS",
+        "titulo": "Soporte Técnico e Infraestructura IT",
         "periodo": "02/2023 - 07/2023",
         "puntos": [
-            "Administración de Seguridad Microsoft 365: Configuración de controles de acceso y gestión de identidades en entornos híbridos.",
-            "Seguridad de Red: Implementación de accesos remotos seguros vía VPN y monitoreo básico de conectividad.",
-            "Soporte a la Disponibilidad: Mantenimiento preventivo y correctivo de hardware y software para garantizar la continuidad del negocio."
+"• Gestión de identidades (IAM) en Azure AD (Entra ID) y Active Directory, administrando accesos
+y políticas de seguridad."
+"• Administración de Seguridad de Endpoints, incluyendo antivirus, endurecimiento de sistemas
+(Hardening) mediante GPOs y conectividad segura vía VPN (SSL/IPsec)."
+"• Respuesta a incidentes N1/N2 bajo cumplimiento de SLA, realizando triaje y mitigación de
+amenazas."
+"• Control y gestión de activos para asegurarla trazabilidad del hardware y mitigar usos no
+autorizados"
         ]
     },
     {
-        "titulo": "Encargado de computación | Red de colegios SIP",
+        "titulo": "Encargado de computación",
         "periodo": "01/2022 - 01/2023",
         "puntos": [
             "Seguridad y Redes: Configuración de Firewalls, Switches (L2/L3) y segmentación de red segura.",
