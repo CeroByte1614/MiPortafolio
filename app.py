@@ -296,13 +296,54 @@ if perfil_img:
 st.markdown("<h1 style='text-align: center; margin-bottom: 5px; font-size: clamp(22px, 6vw, 40px);'>CARLOS E. SOTO VÁSQUEZ</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #00f2ff; font-size: clamp(14px, 4vw, 22px); font-weight: bold;'>Estudiante de Ingeniería en Ciberseguridad y Auditoría Informática</p>", unsafe_allow_html=True)
 
+# --- BOTÓN DE NAVEGACIÓN SUPERIOR ---
+st.markdown("""
+    <div style="text-align: center; margin-top: 15px; margin-bottom: 40px;">
+        <a href="#seccion-sobre-mi" style="color: #00f2ff; text-decoration: none; font-size: 16px; font-weight: bold; border: 1px solid #00f2ff; padding: 8px 20px; border-radius: 20px; background: rgba(0, 242, 255, 0.05); transition: all 0.3s ease;">
+            Conoce más Sobre Mí ↓
+        </a>
+    </div>
+    <style>
+        a[href="#seccion-sobre-mi"]:hover {
+            background: rgba(0, 242, 255, 0.2) !important;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # --- TEXTO DE PERFIL / SOBRE MÍ ---
+# El "id='seccion-sobre-mi'" hace que el botón de arriba baje exactamente hasta aquí
 st.markdown(f"""
-    <div style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 20px; margin-bottom: 25px;">
+    <div id="seccion-sobre-mi" style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 25px;">
         <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" width="35" height="35" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
         <h2 style="margin: 0; color: #00f2ff; text-align: center; font-size: 32px;">Sobre Mí</h2>
     </div>
 """, unsafe_allow_html=True)
+
+# Crear dos columnas: Izquierda (texto) más ancha, Derecha (imagen) un poco más estrecha
+col_texto, col_img = st.columns([1.4, 1], vertical_alignment="center")
+
+with col_texto:
+    st.markdown("""
+        <div class="perfil-texto" style="font-size: 17px; line-height: 1.6; text-align: justify; padding: 25px; background: rgba(17, 34, 64, 0.6); border-radius: 15px; border: 1px solid rgba(0, 242, 255, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin: 0;">
+            Soy un joven de 25 años profundamente apasionado por la tecnología y la ciberseguridad. Actualmente me encuentro cursando mi <b>último año de la carrera de Ingeniería en Ciberseguridad y Auditoría Informática</b>. 
+            <br><br>
+            Me considero una persona proactiva y en constante aprendizaje; disfruto expandiendo mis conocimientos analíticos y técnicos, explorando siempre nuevas herramientas y metodologías dentro del mundo de la seguridad de la información. Cuando me alejo de las pantallas, <b>mi otra gran pasión es el fútbol</b>, un deporte que disfruto muchísimo y que me ayuda a mantener un buen equilibrio, liberar estrés y aplicar el valor del trabajo en equipo en mi día a día.
+            <br><br>
+            A lo largo de mi trayectoria, he consolidado más de 4 años de experiencia en soporte técnico, infraestructura TI y gestión de identidades (IAM). Me especializo en el endurecimiento de sistemas (Hardening), redes bajo el modelo OSI y respuesta a incidentes (N1/N2). Mi objetivo profesional es seguir enfrentando nuevos desafíos e implementar soluciones que protejan los activos críticos bajo los más altos estándares operativos.
+        </div>
+    """, unsafe_allow_html=True)
+
+with col_img:
+    if img_sobre_mi:
+        st.markdown(f"""
+            <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                <img src="data:image/jpeg;base64,{img_sobre_mi}" style="width: 100%; max-width: 380px; height: auto; border-radius: 15px; border: 2px solid #00f2ff; box-shadow: 0 0 20px rgba(0, 242, 255, 0.3); object-fit: cover;">
+            </div>
+        """, unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+st.markdown("---")
 
 # Lógica para mostrar la imagen ANTES del texto
 if img_sobre_mi:
