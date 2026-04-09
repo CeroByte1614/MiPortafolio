@@ -280,14 +280,83 @@ st.markdown(f"""
 </style>
 """, unsafe_allow_html=True)
 
-if perfil_img:
-    st.markdown(f'<div class="profile-pic" style="background-image: url(\'data:image/jpeg;base64,{perfil_img}\');"></div>', unsafe_allow_html=True)
+# --- NUEVO ENCABEZADO ESTILO PORTAFOLIO (Alineado a la Izquierda) ---
+st.markdown(f"""
+    <style>
+    /* Estilos inyectados directamente aquí para no tocar tu sección 5 */
+    .hero-container {{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 40px 0 30px 10px;
+    }}
+    .header-group {{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 15px;
+    }}
+    .hero-profile-pic {{
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        background-size: 180%; 
+        background-position: 70% 20%; 
+        background-repeat: no-repeat;
+        border: 3px solid #00f2ff;
+        box-shadow: 0 0 20px #00f2ff;
+    }}
+    .badge {{
+        background-color: rgba(17, 34, 64, 0.8);
+        border: 1px solid #00f2ff;
+        color: white;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: bold;
+    }}
+    .salute {{
+        font-size: clamp(35px, 5vw, 60px);
+        font-weight: 900;
+        color: white;
+        margin: 0 0 15px 0;
+        line-height: 1.2;
+    }}
+    .experience-para {{
+        font-size: clamp(16px, 2vw, 19px);
+        line-height: 1.6;
+        color: #dcdcdc;
+        max-width: 850px;
+        text-align: left;
+        margin: 0;
+    }}
+    .highlight {{
+        color: #fffd8d; /* Color amarillo texto resaltado */
+        font-weight: bold;
+    }}
+    @media (max-width: 640px) {{
+        .hero-container {{ padding: 20px 0 20px 0; }}
+        .salute {{ font-size: 30px; }}
+    }}
+    </style>
 
-# MODIFICACIÓN: Asegurar que el texto esté centrado
-st.markdown("<h1 style='text-align: center; margin-bottom: 5px; font-size: clamp(22px, 6vw, 40px);'>CARLOS E. SOTO VÁSQUEZ</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #00f2ff; font-size: clamp(14px, 4vw, 22px); font-weight: bold;'>Estudiante de Ingeniería en Ciberseguridad y Auditoría Informática</p>", unsafe_allow_html=True)
-
-st.markdown("---")
+    <div class="hero-container">
+        <div class="header-group">
+            <div class="hero-profile-pic" style="background-image: url('data:image/jpeg;base64,{perfil_img if perfil_img else ""}');"></div>
+            <div class="badge">Disponible para trabajar</div>
+        </div>
+        
+        <h1 class="salute">Hey, soy <span style="color: white;">Carlos Soto</span></h1>
+        
+        <p class="experience-para">
+            <span class="highlight">+4 años de experiencia</span>. 
+            Estudiante de <span class="highlight">Ingeniería en Ciberseguridad</span> y Auditoría Informática
+            de Santiago de Chile cl. Especializado en el área de <span class="highlight">soporte técnico, infraestructura TI</span> 
+            y gestión de identidades (IAM). Apasionado por crear soluciones seguras que generen valor real.
+        </p>
+    </div>
+""", unsafe_allow_html=True)
 
 # --- 7. SECCIÓN EXPERIENCIA ---
 col_prev, col_card, col_next = st.columns([1, 8, 1], vertical_alignment="center")
