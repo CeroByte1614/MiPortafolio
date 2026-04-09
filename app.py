@@ -128,10 +128,12 @@ st.markdown(f"""
     .icon-white:hover {{ transform: scale(1.3); filter: brightness(0) invert(1) drop-shadow(0 0 10px #00f2ff); }}
     
     .profile-pic {{
-        width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
+        width: 150px; height: 150px; border-radius: 50%; 
         
-        /* ESTA ES LA LÍNEA NUEVA: Ajusta el porcentaje para mover la foto arriba o abajo */
-        object-position: center 20%; 
+        /* ESTAS TRES LÍNEAS CONTROLAN EL ZOOM Y ENCUADRE */
+        background-size: 180%; /* 100% es normal. Súbelo a 200% o 250% para más zoom */
+        background-position: 70% 20%; /* Ajusta estos % para mover la cámara y enfocar la cara */
+        background-repeat: no-repeat;
         
         border: 4px solid #00f2ff; box-shadow: 0 0 20px #00f2ff; 
         display: block; margin: 20px auto;
@@ -273,7 +275,6 @@ st.markdown(f"""
             width: 120px;
             height: 120px; 
             border-radius: 50%; 
-            object-fit: cover;
             border: 3px solid #00f2ff; 
             box-shadow: 0 0 15px #00f2ff; 
             display: block; 
@@ -290,7 +291,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 if perfil_img:
-    st.markdown(f'<img src="data:image/jpeg;base64,{perfil_img}" class="profile-pic">', unsafe_allow_html=True)
+    st.markdown(f'<div class="profile-pic" style="background-image: url(\'data:image/jpeg;base64,{perfil_img}\');"></div>', unsafe_allow_html=True)
 
 st.markdown("<h1 style='text-align: center; margin-bottom: 5px; font-size: clamp(22px, 6vw, 40px);'>CARLOS E. SOTO VÁSQUEZ</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #00f2ff; font-size: clamp(14px, 4vw, 22px); font-weight: bold;'>Estudiante de Ingeniería en Ciberseguridad y Auditoría Informática</p>", unsafe_allow_html=True)
