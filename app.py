@@ -29,7 +29,7 @@ img_sobre_mi = get_base64('imagensobremi.jpg')
 # --- 3. DATOS ---
 experiencias = [
     {
-        "titulo": "Service Desk Analyst",
+        "titulo": "Service Desk Analyst | Vector (Salcobrand)",
         "periodo": "08/2025 – Presente",
         "puntos": [
             "Gestión de identidades (IAM) en Azure AD (Entra ID) y Active Directory, administrando accesos y políticas de seguridad.",
@@ -39,7 +39,7 @@ experiencias = [
         ]
     },
     {
-        "titulo": "Soporte Técnico e Infraestructura IT",
+        "titulo": "Soporte Técnico e Infraestructura IT | UpcomDTS",
         "periodo": "02/2023 – 07/2025",
         "puntos": [
             "Administración de seguridad en Microsoft 365, configurando controles de acceso e identidades en entornos híbridos.",
@@ -48,7 +48,7 @@ experiencias = [
         ]
     },
     {
-        "titulo": "Encargado de Computación",
+        "titulo": "Encargado de Computación | Red de Colegios SIP",
         "periodo": "01/2022 – 01/2023",
         "puntos": [
             "Gestión y segmentación de red segura mediante la configuración de Firewalls y Switches (L2/L3).",
@@ -102,11 +102,10 @@ st.markdown(f"""
         animation: moveBackground 30s ease-in-out infinite;
     }}
     
-    /* CAMBIO: Arreglo para que el fondo se vea bien en celulares */
     @media (max-width: 640px) {{
         .stApp {{
-            background-size: cover !important; /* Ajusta la imagen a la pantalla sin zoom excesivo */
-            background-position: center center !important; /* Centra la imagen */
+            background-size: cover !important; 
+            background-position: center center !important; 
         }}
     }}
 
@@ -129,12 +128,9 @@ st.markdown(f"""
     
     .profile-pic {{
         width: 150px; height: 150px; border-radius: 50%; 
-        
-        /* ESTAS TRES LÍNEAS CONTROLAN EL ZOOM Y ENCUADRE */
-        background-size: 180%; /* 100% es normal. Súbelo a 200% o 250% para más zoom */
-        background-position: 70% 20%; /* Ajusta estos % para mover la cámara y enfocar la cara */
+        background-size: 180%; 
+        background-position: 70% 20%; 
         background-repeat: no-repeat;
-        
         border: 4px solid #00f2ff; box-shadow: 0 0 20px #00f2ff; 
         display: block; margin: 20px auto;
         transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -248,20 +244,18 @@ st.markdown(f"""
         filter: drop-shadow(0 0 8px rgba(0, 242, 255, 0.8));
     }}
     
-    /* Estilos del texto fijo arriba a la izquierda */
     .header-left {{
         position: fixed;
-        top: 25px;  /* CAMBIO: Ahora arriba */
+        top: 25px;  
         left: 25px;
         color: white;
         font-weight: bold;
-        font-size: 24px; /* CAMBIO: Tamaño más grande */
+        font-size: 24px; 
         z-index: 9999;
         font-family: 'Segoe UI', sans-serif;
         text-shadow: 0 0 5px rgba(0,0,0,0.5);
     }}
 
-    /* Ajustes para móviles */
     @media (max-width: 640px) {{
         .social-header {{
             justify-content: flex-end;
@@ -280,11 +274,10 @@ st.markdown(f"""
             display: block; 
             margin: 15px auto;
         }}
-        /* Ajuste de posición en móvil */
         .header-left {{
-            top: 15px; /* CAMBIO: Arriba en móvil */
+            top: 15px; 
             left: 15px;
-            font-size: 18px; /* Un poco más pequeño en móvil pero legible */
+            font-size: 18px; 
         }}
     }}
 </style>
@@ -312,7 +305,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- TEXTO DE PERFIL / SOBRE MÍ ---
-# El "id='seccion-sobre-mi'" hace que el botón de arriba baje exactamente hasta aquí
 st.markdown(f"""
     <div id="seccion-sobre-mi" style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 25px;">
         <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" width="35" height="35" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
@@ -320,7 +312,6 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# Crear dos columnas: Izquierda (texto) más ancha, Derecha (imagen) un poco más estrecha
 col_texto, col_img = st.columns([1.4, 1], vertical_alignment="center")
 
 with col_texto:
@@ -345,25 +336,6 @@ with col_img:
 st.markdown("<br>", unsafe_allow_html=True)
 st.markdown("---")
 
-# Lógica para mostrar la imagen ANTES del texto
-if img_sobre_mi:
-    st.markdown(f"""
-        <div style="display: flex; justify-content: center; margin-bottom: 30px;">
-            <img src="data:image/jpeg;base64,{img_sobre_mi}" style="max-width: 90%; height: auto; max-height: 450px; border-radius: 15px; border: 2px solid #00f2ff; box-shadow: 0 0 20px rgba(0, 242, 255, 0.3); object-fit: cover;">
-        </div>
-    """, unsafe_allow_html=True)
-
-# Mostrar el texto al final
-st.markdown("""
-    <div class="perfil-texto" style="font-size: 17px; line-height: 1.6; max-width: 900px; text-align: justify; padding: 25px; background: rgba(17, 34, 64, 0.6); border-radius: 15px; border: 1px solid rgba(0, 242, 255, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-        Soy un joven de 25 años profundamente apasionado por la tecnología y la ciberseguridad. Actualmente me encuentro cursando mi <b>último año de la carrera de Ingeniería en Ciberseguridad y Auditoría Informática</b>. 
-        <br><br>
-        Me considero una persona proactiva y en constante aprendizaje; disfruto expandiendo mis conocimientos analíticos y técnicos, explorando siempre nuevas herramientas y metodologías dentro del mundo de la seguridad de la información. Cuando me alejo de las pantallas, <b>mi otra gran pasión es el fútbol</b>, un deporte que disfruto muchísimo y que me ayuda a mantener un buen equilibrio, liberar estrés y aplicar el valor del trabajo en equipo en mi día a día.
-        <br><br>
-        A lo largo de mi trayectoria, he consolidado más de 4 años de experiencia en soporte técnico, infraestructura TI y gestión de identidades (IAM). Me especializo en el endurecimiento de sistemas (Hardening), redes bajo el modelo OSI y respuesta a incidentes (N1/N2). Mi objetivo profesional es seguir enfrentando nuevos desafíos e implementar soluciones que protejan los activos críticos bajo los más altos estándares operativos.
-    </div>
-""", unsafe_allow_html=True)
-
 # --- 7. SECCIÓN EXPERIENCIA ---
 col_prev, col_card, col_next = st.columns([1, 8, 1], vertical_alignment="center")
 
@@ -379,8 +351,6 @@ with col_card:
     exp = experiencias[st.session_state.exp_index]
     puntos_html = "".join([f"<li>{p}</li>" for p in exp['puntos']])
     
-    # Creamos un contenedor con una clave única (st.session_state.exp_index)
-    # Esto fuerza a la página a reiniciar la animación CSS al cambiar de tarjeta
     st.container(key=f"card_{st.session_state.exp_index}").markdown(f"""
     <div class="exp-card">
         <h2 style='text-align: left;'>{exp['titulo']}</h2>
