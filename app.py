@@ -289,21 +289,6 @@ if perfil_img:
 st.markdown("<h1 style='text-align: center; margin-bottom: 5px; font-size: clamp(22px, 6vw, 40px);'>CARLOS E. SOTO VÁSQUEZ</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #00f2ff; font-size: clamp(14px, 4vw, 22px); font-weight: bold;'>Estudiante de Ingeniería en Ciberseguridad y Auditoría Informática</p>", unsafe_allow_html=True)
 
-# --- BOTÓN DE NAVEGACIÓN SUPERIOR ---
-st.markdown("""
-    <div style="text-align: center; margin-top: 15px; margin-bottom: 40px;">
-        <a href="#seccion-sobre-mi" style="color: #00f2ff; text-decoration: none; font-size: 16px; font-weight: bold; border: 1px solid #00f2ff; padding: 8px 20px; border-radius: 20px; background: rgba(0, 242, 255, 0.05); transition: all 0.3s ease;">
-            Conoce más Sobre Mí ↓
-        </a>
-    </div>
-    <style>
-        a[href="#seccion-sobre-mi"]:hover {
-            background: rgba(0, 242, 255, 0.2) !important;
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
-        }
-    </style>
-""", unsafe_allow_html=True)
-
 # --- TEXTO DE PERFIL / SOBRE MÍ ---
 
 # Crear dos columnas: Izquierda (texto) más ancha, Derecha (imagen) un poco más estrecha
