@@ -366,6 +366,19 @@ with col_prev:
         st.rerun()
     st.markdown('</div>', unsafe_allow_html=True)
 
+    st.markdown("<br><br>", unsafe_allow_html=True) # Esto crea el espacio que pediste
+
+# Título de la sección con ícono
+st.markdown(f"""
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 25px; padding-left: 10px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/3281/3281289.png" width="35" height="35" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
+        <h2 style="margin: 0; color: #00f2ff; font-size: 32px; font-family: 'Segoe UI', sans-serif;">Experiencia</h2>
+    </div>
+""", unsafe_allow_html=True)
+
+# --- 7. SECCIÓN EXPERIENCIA (Aquí continúan tus columnas) ---
+col_prev, col_card, col_next = st.columns([1, 8, 1], vertical_alignment="center")
+
 with col_card:
     exp = experiencias[st.session_state.exp_index]
     puntos_html = "".join([f"<li>{p}</li>" for p in exp['puntos']])
