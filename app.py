@@ -280,10 +280,9 @@ st.markdown(f"""
 </style>
 """, unsafe_allow_html=True)
 
-# --- NUEVO ENCABEZADO ESTILO PORTAFOLIO (Alineado a la Izquierda) ---
+# --- ENCABEZADO PROFESIONAL (ESTILO MATIAS PONCE CON HOVER) ---
 st.markdown(f"""
     <style>
-    /* Estilos inyectados directamente aquí para no tocar tu sección 5 */
     .hero-container {{
         display: flex;
         flex-direction: column;
@@ -297,15 +296,22 @@ st.markdown(f"""
         gap: 20px;
         margin-bottom: 15px;
     }}
+    /* Efecto de agrandar imagen al pasar el mouse */
     .hero-profile-pic {{
-        width: 110px;
-        height: 110px;
+        width: 120px;
+        height: 120px;
         border-radius: 50%;
         background-size: 180%; 
         background-position: 70% 20%; 
         background-repeat: no-repeat;
         border: 3px solid #00f2ff;
         box-shadow: 0 0 20px #00f2ff;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }}
+    .hero-profile-pic:hover {{
+        transform: scale(1.15); /* Se agranda un 15% */
+        box-shadow: 0 0 40px #00f2ff;
     }}
     .badge {{
         background-color: rgba(17, 34, 64, 0.8);
@@ -317,27 +323,27 @@ st.markdown(f"""
         font-weight: bold;
     }}
     .salute {{
-        font-size: clamp(35px, 5vw, 60px);
+        font-size: clamp(35px, 5vw, 55px);
         font-weight: 900;
         color: white;
-        margin: 0 0 15px 0;
-        line-height: 1.2;
+        margin: 10px 0 20px 0;
+        line-height: 1.1;
     }}
     .experience-para {{
-        font-size: clamp(16px, 2vw, 19px);
+        font-size: clamp(17px, 2vw, 20px);
         line-height: 1.6;
-        color: #dcdcdc;
+        color: #f0f0f0;
         max-width: 850px;
         text-align: left;
         margin: 0;
     }}
     .highlight {{
-        color: #fffd8d; /* Color amarillo texto resaltado */
+        color: #fffd8d; /* Amarillo resaltado */
         font-weight: bold;
     }}
     @media (max-width: 640px) {{
         .hero-container {{ padding: 20px 0 20px 0; }}
-        .salute {{ font-size: 30px; }}
+        .salute {{ font-size: 32px; }}
     }}
     </style>
 
