@@ -28,7 +28,7 @@ icon_habilidades_img = get_base64(os.path.join(ruta_base, 'iconohabilidades.png'
 # --- 3. DATOS ---
 experiencias = [
     {
-        "titulo": "Service Desk Analyst | Vector (Salcobrand)",
+        "titulo": "Service Desk Analyst",
         "periodo": "08/2025 – Presente",
         "puntos": [
             "Gestión de identidades (IAM) en Azure AD (Entra ID) y Active Directory, administrando accesos y políticas de seguridad.",
@@ -38,7 +38,7 @@ experiencias = [
         ]
     },
     {
-        "titulo": "Soporte Técnico e Infraestructura IT | UpcomDTS",
+        "titulo": "Soporte Técnico e Infraestructura IT",
         "periodo": "02/2023 – 07/2025",
         "puntos": [
             "Administración de seguridad en Microsoft 365, configurando controles de acceso e identidades en entornos híbridos.",
@@ -47,7 +47,7 @@ experiencias = [
         ]
     },
     {
-        "titulo": "Encargado de Computación | Red de Colegios SIP",
+        "titulo": "Encargado de Computación",
         "periodo": "01/2022 – 01/2023",
         "puntos": [
             "Gestión y segmentación de red segura mediante la configuración de Firewalls y Switches (L2/L3).",
