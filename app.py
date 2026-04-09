@@ -291,6 +291,11 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 if perfil_img:
+    st.markdown(f'<div class="profile-pic" style="background-image: url(\'data:image/jpeg;base64,{perfil_img}\');"></div>', unsafe_allow_html=True)
+
+st.markdown("<h1 style='text-align: center; margin-bottom: 5px; font-size: clamp(22px, 6vw, 40px);'>CARLOS E. SOTO VÁSQUEZ</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #00f2ff; font-size: clamp(14px, 4vw, 22px); font-weight: bold;'>Estudiante de Ingeniería en Ciberseguridad y Auditoría Informática</p>", unsafe_allow_html=True)
+
 # --- TEXTO DE PERFIL / SOBRE MÍ ---
 st.markdown(f"""
     <div style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 20px; margin-bottom: 25px;">
@@ -308,18 +313,15 @@ if img_sobre_mi:
     """, unsafe_allow_html=True)
 
 # Mostrar el texto al final
-        st.markdown("""
-        <div class="perfil-texto" style="font-size: 17px; line-height: 1.6; max-width: 900px; text-align: justify; padding: 25px; background: rgba(17, 34, 64, 0.6); border-radius: 15px; border: 1px solid rgba(0, 242, 255, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+st.markdown("""
+    <div class="perfil-texto" style="font-size: 17px; line-height: 1.6; max-width: 900px; text-align: justify; padding: 25px; background: rgba(17, 34, 64, 0.6); border-radius: 15px; border: 1px solid rgba(0, 242, 255, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
         Soy un joven de 25 años profundamente apasionado por la tecnología y la ciberseguridad. Actualmente me encuentro cursando mi <b>último año de la carrera de Ingeniería en Ciberseguridad y Auditoría Informática</b>. 
         <br><br>
         Me considero una persona proactiva y en constante aprendizaje; disfruto expandiendo mis conocimientos analíticos y técnicos, explorando siempre nuevas herramientas y metodologías dentro del mundo de la seguridad de la información. Cuando me alejo de las pantallas, <b>mi otra gran pasión es el fútbol</b>, un deporte que disfruto muchísimo y que me ayuda a mantener un buen equilibrio, liberar estrés y aplicar el valor del trabajo en equipo en mi día a día.
         <br><br>
         A lo largo de mi trayectoria, he consolidado más de 4 años de experiencia en soporte técnico, infraestructura TI y gestión de identidades (IAM). Me especializo en el endurecimiento de sistemas (Hardening), redes bajo el modelo OSI y respuesta a incidentes (N1/N2). Mi objetivo profesional es seguir enfrentando nuevos desafíos e implementar soluciones que protejan los activos críticos bajo los más altos estándares operativos.
-            </div>
+    </div>
 """, unsafe_allow_html=True)
-
-st.markdown("<br>", unsafe_allow_html=True)
-st.markdown("---")    
 
 # --- 7. SECCIÓN EXPERIENCIA ---
 col_prev, col_card, col_next = st.columns([1, 8, 1], vertical_alignment="center")
