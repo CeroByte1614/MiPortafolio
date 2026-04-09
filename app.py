@@ -280,88 +280,79 @@ st.markdown(f"""
 </style>
 """, unsafe_allow_html=True)
 
-# --- ENCABEZADO PROFESIONAL (ESTILO MATIAS PONCE CON HOVER) ---
-st.markdown(f"""
-    <style>
-    .hero-container {{
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        padding: 40px 0 30px 10px;
-    }}
-    .header-group {{
+# --- ENCABEZADO LIMPIO Y PROFESIONAL ---
+# Definimos el CSS primero
+st.markdown("""
+<style>
+    .hero-container {
+        padding: 20px 0px;
+        text-align: left;
+    }
+    .header-group {
         display: flex;
         align-items: center;
         gap: 20px;
-        margin-bottom: 15px;
-    }}
-    /* Efecto de agrandar imagen al pasar el mouse */
-    .hero-profile-pic {{
+        margin-bottom: 10px;
+    }
+    .hero-profile-pic {
         width: 120px;
         height: 120px;
         border-radius: 50%;
-        background-size: 180%; 
-        background-position: 70% 20%; 
-        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
         border: 3px solid #00f2ff;
         box-shadow: 0 0 20px #00f2ff;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: transform 0.3s ease;
         cursor: pointer;
-    }}
-    .hero-profile-pic:hover {{
-        transform: scale(1.15); /* Se agranda un 15% */
-        box-shadow: 0 0 40px #00f2ff;
-    }}
-    .badge {{
+    }
+    .hero-profile-pic:hover {
+        transform: scale(1.15);
+    }
+    .badge {
         background-color: rgba(17, 34, 64, 0.8);
         border: 1px solid #00f2ff;
         color: white;
-        padding: 6px 16px;
+        padding: 5px 15px;
         border-radius: 20px;
         font-size: 14px;
         font-weight: bold;
-    }}
-    .salute {{
-        font-size: clamp(35px, 5vw, 55px);
+    }
+    .salute {
+        font-size: 50px;
         font-weight: 900;
         color: white;
-        margin: 10px 0 20px 0;
-        line-height: 1.1;
-    }}
-    .experience-para {{
-        font-size: clamp(17px, 2vw, 20px);
+        margin: 10px 0px;
+        font-family: 'Segoe UI', sans-serif;
+    }
+    .experience-para {
+        font-size: 19px;
         line-height: 1.6;
         color: #f0f0f0;
-        max-width: 850px;
-        text-align: left;
-        margin: 0;
-    }}
-    .highlight {{
-        color: #fffd8d; /* Amarillo resaltado */
+        max-width: 800px;
+        font-family: 'Segoe UI', sans-serif;
+    }
+    .highlight {
+        color: #fffd8d;
         font-weight: bold;
-    }}
-    @media (max-width: 640px) {{
-        .hero-container {{ padding: 20px 0 20px 0; }}
-        .salute {{ font-size: 32px; }}
-    }}
-    </style>
+    }
+</style>
+""", unsafe_allow_html=True)
 
-    <div class="hero-container">
-        <div class="header-group">
-            <div class="hero-profile-pic" style="background-image: url('data:image/jpeg;base64,{perfil_img if perfil_img else ""}');"></div>
-            <div class="badge">Disponible para trabajar</div>
-        </div>
-        
-        <h1 class="salute">Hey, soy <span style="color: white;">Carlos Soto</span></h1>
-        
-        <p class="experience-para">
-            <span class="highlight">+4 años de experiencia</span>. 
-            Estudiante de <span class="highlight">Ingeniería en Ciberseguridad</span> y Auditoría Informática
-            de Santiago de Chile cl. Especializado en el área de <span class="highlight">soporte técnico, infraestructura TI</span> 
-            y gestión de identidades (IAM). Apasionado por crear soluciones seguras que generen valor real.
-        </p>
+# Ahora renderizamos el contenido
+st.markdown(f"""
+<div class="hero-container">
+    <div class="header-group">
+        <div class="hero-profile-pic" style="background-image: url('data:image/jpeg;base64,{perfil_img}');"></div>
+        <div class="badge">Disponible para trabajar</div>
     </div>
+    <div class="salute">Hey, soy Carlos Soto</div>
+    <div class="experience-para">
+        <span class="highlight">+4 años de experiencia</span>. 
+        Estudiante de <span class="highlight">Ingeniería en Ciberseguridad</span> y Auditoría Informática 
+        de Santiago de Chile cl. Especializado en el área de <span class="highlight">soporte técnico, infraestructura TI</span> 
+        y gestión de identidades (IAM). Apasionado por crear soluciones seguras que generen valor real.
+    </div>
+</div>
 """, unsafe_allow_html=True)
 
 # --- 7. SECCIÓN EXPERIENCIA ---
