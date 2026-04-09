@@ -28,38 +28,32 @@ icon_habilidades_img = get_base64(os.path.join(ruta_base, 'iconohabilidades.png'
 # --- 3. DATOS ---
 experiencias = [
     {
-        "titulo": "Service Desk Analyst",
-        "periodo": "07/2023 - Presente",
+        "titulo": "Service Desk Analyst | Vector (Salcobrand)",
+        "periodo": "08/2025 – Presente",
         "puntos": [
-            "IAM: Administración de identidades y accesos en Azure AD (Entra ID) y Directorio Activo.",
-            "Seguridad de Endpoints: Gestión de políticas, antivirus y conectividad segura vía VPN (SSL/IPsec).",
-            "Hardening: Endurecimiento de sistemas y restricción de software mediante GPOs.",
-            "Respuesta a Incidentes: Triaje y resolución de incidentes de seguridad (N1/N2) bajo SLA.",
-            "Gestión de Activos: Control de inventario para trazabilidad y mitigación de uso no autorizado de hardware."
+            "Gestión de identidades (IAM) en Azure AD (Entra ID) y Active Directory, administrando accesos y políticas de seguridad.",
+            "Administración de Seguridad de Endpoints, incluyendo antivirus, endurecimiento de sistemas (Hardening) mediante GPOs y conectividad segura vía VPN (SSL/IPsec).",
+            "Respuesta a incidentes N1/N2 bajo cumplimiento de SLA, realizando triaje y mitigación de amenazas.",
+            "Control y gestión de activos para asegurar la trazabilidad del hardware y mitigar usos no autorizados."
         ]
     },
     {
-        "titulo": "Soporte Técnico e Infraestructura IT",
-        "periodo": "02/2023 - 07/2023",
+        "titulo": "Soporte Técnico e Infraestructura IT | UpcomDTS",
+        "periodo": "02/2023 – 07/2025",
         "puntos": [
-"• Gestión de identidades (IAM) en Azure AD (Entra ID) y Active Directory, administrando accesos
-y políticas de seguridad."
-"• Administración de Seguridad de Endpoints, incluyendo antivirus, endurecimiento de sistemas
-(Hardening) mediante GPOs y conectividad segura vía VPN (SSL/IPsec)."
-"• Respuesta a incidentes N1/N2 bajo cumplimiento de SLA, realizando triaje y mitigación de
-amenazas."
-"• Control y gestión de activos para asegurarla trazabilidad del hardware y mitigar usos no
-autorizados"
+            "Administración de seguridad en Microsoft 365, configurando controles de acceso e identidades en entornos híbridos.",
+            "Implementación de accesos remotos seguros vía VPN y monitoreo de conectividad para garantizar la integridad de la red.",
+            "Documentación de activos críticos y mantenimiento de hardware/software para asegurar la disponibilidad y continuidad operativa del negocio."
         ]
     },
     {
-        "titulo": "Encargado de computación",
-        "periodo": "01/2022 - 01/2023",
+        "titulo": "Encargado de Computación | Red de Colegios SIP",
+        "periodo": "01/2022 – 01/2023",
         "puntos": [
-            "Seguridad y Redes: Configuración de Firewalls, Switches (L2/L3) y segmentación de red segura.",
-            "Monitoreo: Detección de anomalías y análisis de tráfico mediante herramientas de sniffing.",
-            "Infraestructura: Gestión integral de Data Center, Racks y respaldo eléctrico (UPS).",
-            "Control de Acceso: Gestión de usuarios y filtrado de contenido según normativas de seguridad."
+            "Gestión y segmentación de red segura mediante la configuración de Firewalls y Switches (L2/L3).",
+            "Monitoreo de tráfico y detección de anomalías utilizando herramientas de sniffing para asegurar la integridad de la red.",
+            "Administración integral de infraestructura física en Data Center, incluyendo gestión de Racks y sistemas de respaldo eléctrico (UPS).",
+            "Control de acceso y filtrado de contenido conforme a normativas de seguridad y políticas institucionales."
         ]
     }
 ]
