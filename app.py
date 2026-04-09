@@ -125,7 +125,11 @@ st.markdown(f"""
         background-position: 70% 20%; 
         background-repeat: no-repeat;
         border: 4px solid #00f2ff; box-shadow: 0 0 20px #00f2ff; 
-        display: block; margin: 20px auto;
+        display: block; 
+        
+        /* MODIFICACIÓN: Aumentar el margen superior de 20px a 50px (o el valor deseado) */
+        margin: 50px auto 20px auto; 
+        
         transition: transform 0.4s ease, box-shadow 0.4s ease;
     }}
     .profile-pic:hover {{
@@ -279,8 +283,9 @@ st.markdown(f"""
 if perfil_img:
     st.markdown(f'<div class="profile-pic" style="background-image: url(\'data:image/jpeg;base64,{perfil_img}\');"></div>', unsafe_allow_html=True)
 
+# MODIFICACIÓN: Asegurar que el texto esté centrado
 st.markdown("<h1 style='text-align: center; margin-bottom: 5px; font-size: clamp(22px, 6vw, 40px);'>CARLOS E. SOTO VÁSQUEZ</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #00f2ff; font-size: clamp(14px, 4vw, 22px); font-weight: bold; margin-bottom: 30px;'>Estudiante de Ingeniería en Ciberseguridad y Auditoría Informática</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #00f2ff; font-size: clamp(14px, 4vw, 22px); font-weight: bold;'>Estudiante de Ingeniería en Ciberseguridad y Auditoría Informática</p>", unsafe_allow_html=True)
 
 st.markdown("---")
 
