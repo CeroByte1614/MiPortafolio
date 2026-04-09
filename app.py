@@ -116,13 +116,6 @@ st.markdown(f"""
         flex-wrap: wrap; 
         margin-top: 10px;
     }}
-    .cv-title {{ 
-        text-align: center; 
-        color: white; 
-        font-weight: bold; 
-        font-size: 18px; 
-        margin-bottom: 10px;
-    }}
     .icon-white {{ width: 30px; filter: brightness(0) invert(1); transition: transform 0.3s ease; }}
     .icon-white:hover {{ transform: scale(1.3); filter: brightness(0) invert(1) drop-shadow(0 0 10px #00f2ff); }}
     
@@ -287,42 +280,8 @@ if perfil_img:
     st.markdown(f'<div class="profile-pic" style="background-image: url(\'data:image/jpeg;base64,{perfil_img}\');"></div>', unsafe_allow_html=True)
 
 st.markdown("<h1 style='text-align: center; margin-bottom: 5px; font-size: clamp(22px, 6vw, 40px);'>CARLOS E. SOTO VÁSQUEZ</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #00f2ff; font-size: clamp(14px, 4vw, 22px); font-weight: bold;'>Estudiante de Ingeniería en Ciberseguridad y Auditoría Informática</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #00f2ff; font-size: clamp(14px, 4vw, 22px); font-weight: bold; margin-bottom: 30px;'>Estudiante de Ingeniería en Ciberseguridad y Auditoría Informática</p>", unsafe_allow_html=True)
 
-# --- TEXTO DE PERFIL / SOBRE MÍ ---
-
-# Crear dos columnas: Izquierda (texto) más ancha, Derecha (imagen) un poco más estrecha
-col_texto, col_img = st.columns([1.4, 1], vertical_alignment="center")
-
-with col_texto:
-    # 1. Título alineado a la izquierda con el nuevo ícono de Ciberseguridad (Usuario + Escudo)
-    st.markdown(f"""
-        <div id="seccion-sobre-mi" style="display: flex; justify-content: flex-start; align-items: center; gap: 12px; margin-bottom: 15px; padding-left: 5px;">
-            <img src="https://cdn-icons-png.flaticon.com/512/1000/1000997.png" width="38" height="38" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
-            <h2 style="margin: 0; color: #00f2ff; text-align: left; font-size: 32px;">Sobre Mí</h2>
-        </div>
-    """, unsafe_allow_html=True)
-
-    # 2. Caja de texto
-    st.markdown("""
-        <div class="perfil-texto" style="font-size: 17px; line-height: 1.6; text-align: justify; padding: 25px; background: rgba(17, 34, 64, 0.6); border-radius: 15px; border: 1px solid rgba(0, 242, 255, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin: 0;">
-            Soy un joven de 25 años profundamente apasionado por la tecnología y la ciberseguridad. Actualmente me encuentro cursando mi <b>último año de la carrera de Ingeniería en Ciberseguridad y Auditoría Informática</b>. 
-            <br><br>
-            Me considero una persona proactiva y en constante aprendizaje; disfruto expandiendo mis conocimientos analíticos y técnicos, explorando siempre nuevas herramientas y metodologías dentro del mundo de la seguridad de la información. Cuando me alejo de las pantallas, <b>mi otra gran pasión es el fútbol</b>, un deporte que disfruto muchísimo y que me ayuda a mantener un buen equilibrio, liberar estrés y aplicar el valor del trabajo en equipo en mi día a día.
-            <br><br>
-            A lo largo de mi trayectoria, he consolidado más de 4 años de experiencia en soporte técnico, infraestructura TI y gestión de identidades (IAM). Me especializo en el endurecimiento de sistemas (Hardening), redes bajo el modelo OSI y respuesta a incidentes (N1/N2). Mi objetivo profesional es seguir enfrentando nuevos desafíos e implementar soluciones que protejan los activos críticos bajo los más altos estándares operativos.
-        </div>
-    """, unsafe_allow_html=True)
-
-with col_img:
-    if img_sobre_mi:
-        st.markdown(f"""
-            <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                <img src="data:image/jpeg;base64,{img_sobre_mi}" style="width: 100%; max-width: 380px; height: auto; border-radius: 15px; border: 2px solid #00f2ff; box-shadow: 0 0 20px rgba(0, 242, 255, 0.3); object-fit: cover;">
-            </div>
-        """, unsafe_allow_html=True)
-
-st.markdown("<br>", unsafe_allow_html=True)
 st.markdown("---")
 
 # --- 7. SECCIÓN EXPERIENCIA ---
@@ -391,3 +350,37 @@ with c2:
     
     html_habilidades = "".join([f'<span class="skill-tag" data-description="{desc}">{nombre}</span> ' for nombre, desc in habilidades.items()])
     st.markdown(html_habilidades, unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+st.markdown("---")
+
+# --- 9. TEXTO DE PERFIL / SOBRE MÍ ---
+col_texto, col_img = st.columns([1.4, 1], vertical_alignment="center")
+
+with col_texto:
+    st.markdown(f"""
+        <div id="seccion-sobre-mi" style="display: flex; justify-content: flex-start; align-items: center; gap: 12px; margin-bottom: 15px; padding-left: 5px;">
+            <img src="https://cdn-icons-png.flaticon.com/512/1000/1000997.png" width="38" height="38" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
+            <h2 style="margin: 0; color: #00f2ff; text-align: left; font-size: 32px;">Sobre Mí</h2>
+        </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+        <div class="perfil-texto" style="font-size: 17px; line-height: 1.6; text-align: justify; padding: 25px; background: rgba(17, 34, 64, 0.6); border-radius: 15px; border: 1px solid rgba(0, 242, 255, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin: 0;">
+            Soy un joven de 25 años profundamente apasionado por la tecnología y la ciberseguridad. Actualmente me encuentro cursando mi <b>último año de la carrera de Ingeniería en Ciberseguridad y Auditoría Informática</b>. 
+            <br><br>
+            Me considero una persona proactiva y en constante aprendizaje; disfruto expandiendo mis conocimientos analíticos y técnicos, explorando siempre nuevas herramientas y metodologías dentro del mundo de la seguridad de la información. Cuando me alejo de las pantallas, <b>mi otra gran pasión es el fútbol</b>, un deporte que disfruto muchísimo y que me ayuda a mantener un buen equilibrio, liberar estrés y aplicar el valor del trabajo en equipo en mi día a día.
+            <br><br>
+            A lo largo de mi trayectoria, he consolidado más de 4 años de experiencia en soporte técnico, infraestructura TI y gestión de identidades (IAM). Me especializo en el endurecimiento de sistemas (Hardening), redes bajo el modelo OSI y respuesta a incidentes (N1/N2). Mi objetivo profesional es seguir enfrentando nuevos desafíos e implementar soluciones que protejan los activos críticos bajo los más altos estándares operativos.
+        </div>
+    """, unsafe_allow_html=True)
+
+with col_img:
+    if img_sobre_mi:
+        st.markdown(f"""
+            <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                <img src="data:image/jpeg;base64,{img_sobre_mi}" style="width: 100%; max-width: 380px; height: auto; border-radius: 15px; border: 2px solid #00f2ff; box-shadow: 0 0 20px rgba(0, 242, 255, 0.3); object-fit: cover;">
+            </div>
+        """, unsafe_allow_html=True)
+
+st.markdown("<br><br>", unsafe_allow_html=True)
