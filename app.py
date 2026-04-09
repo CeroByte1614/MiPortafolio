@@ -129,6 +129,10 @@ st.markdown(f"""
     
     .profile-pic {{
         width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
+        
+        /* ESTA ES LA LÍNEA NUEVA: Ajusta el porcentaje para mover la foto arriba o abajo */
+        object-position: center 20%; 
+        
         border: 4px solid #00f2ff; box-shadow: 0 0 20px #00f2ff; 
         display: block; margin: 20px auto;
         transition: transform 0.4s ease, box-shadow 0.4s ease;
