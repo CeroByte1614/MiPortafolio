@@ -356,17 +356,15 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # --- 7. SECCIÓN EXPERIENCIA ---
-col_prev, col_card, col_next = st.columns([1, 8, 1], vertical_alignment="center")
+st.markdown("<br><br>", unsafe_allow_html=True)
 
-with col_prev:
-    st.markdown('<div style="text-align: right;">', unsafe_allow_html=True)
-    if st.button("❮ Anterior", key="prev_btn"):
-        st.session_state.exp_index = (st.session_state.exp_index - 1) % len(experiencias)
-        st.session_state.last_refresh = time.time()
-        st.rerun()
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    st.markdown("<br><br>", unsafe_allow_html=True) # Esto crea el espacio que pediste
+# Título con icono de Escudo Proactivo
+st.markdown(f"""
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 25px; padding-left: 10px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/2092/2092204.png" width="35" height="35" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
+        <h2 style="margin: 0; color: #00f2ff; font-size: 32px; font-family: 'Segoe UI', sans-serif;">Experiencia</h2>
+    </div>
+""", unsafe_allow_html=True)
 
 # Título de la sección con ícono
 st.markdown(f"""
@@ -378,6 +376,38 @@ st.markdown(f"""
 
 # --- 7. SECCIÓN EXPERIENCIA (Aquí continúan tus columnas) ---
 col_prev, col_card, col_next = st.columns([1, 8, 1], vertical_alignment="center")
+
+st.markdown(f"""
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 25px; padding-left: 10px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/2092/2092204.png" width="35" height="35" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
+        <h2 style="margin: 0; color: #00f2ff; font-size: 32px; font-family: 'Segoe UI', sans-serif;">Experiencia</h2>
+    </div>
+""", unsafe_allow_html=True)
+
+col_prev, col_card, col_next = st.columns([1, 8, 1], vertical_alignment="center")
+
+# 2. EL BOTÓN ANTERIOR (Reemplaza lo que hay dentro de col_prev)
+with col_prev:
+    st.markdown("""
+        <div style="display: flex; justify-content: flex-end; align-items: center; height: 100%; min-width: 80px;">
+            <style>
+                div.stButton > button[key="prev_btn"] {
+                    background-color: transparent !important;
+                    border: none !important;
+                    color: #00f2ff !important;
+                    font-size: 20px !important;
+                    font-weight: bold !important;
+                    padding: 0 !important;
+                }
+            </style>
+    """, unsafe_allow_html=True)
+    
+    if st.button("❮ Anterior", key="prev_btn"):
+        st.session_state.exp_index = (st.session_state.exp_index - 1) % len(experiencias)
+        st.session_state.last_refresh = time.time()
+        st.rerun()
+        
+    st.markdown("</div>", unsafe_allow_html=True)
 
 with col_card:
     exp = experiencias[st.session_state.exp_index]
