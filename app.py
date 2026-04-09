@@ -21,7 +21,7 @@ def get_base64(bin_file):
 # --- 2. CARGA DE RECURSOS ---
 ruta_base = os.path.dirname(__file__)
 bg_img = get_base64('imagenciberseguridad.jpg')
-perfil_img = get_base64('imagencarlos.jpeg')
+perfil_img = get_base64('imagencarlos.png')
 bg_card_img = get_base64('imagenciberseguridad2.jpg')
 icon_habilidades_img = get_base64(os.path.join(ruta_base, 'iconohabilidades.png'))
 
