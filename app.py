@@ -305,16 +305,20 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- TEXTO DE PERFIL / SOBRE MÍ ---
-st.markdown(f"""
-    <div id="seccion-sobre-mi" style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 25px;">
-        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" width="35" height="35" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
-        <h2 style="margin: 0; color: #00f2ff; text-align: center; font-size: 32px;">Sobre Mí</h2>
-    </div>
-""", unsafe_allow_html=True)
 
+# Crear dos columnas: Izquierda (texto) más ancha, Derecha (imagen) un poco más estrecha
 col_texto, col_img = st.columns([1.4, 1], vertical_alignment="center")
 
 with col_texto:
+    # 1. Título alineado a la izquierda con el nuevo ícono de Ciberseguridad (Usuario + Escudo)
+    st.markdown(f"""
+        <div id="seccion-sobre-mi" style="display: flex; justify-content: flex-start; align-items: center; gap: 12px; margin-bottom: 15px; padding-left: 5px;">
+            <img src="https://cdn-icons-png.flaticon.com/512/1000/1000997.png" width="38" height="38" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
+            <h2 style="margin: 0; color: #00f2ff; text-align: left; font-size: 32px;">Sobre Mí</h2>
+        </div>
+    """, unsafe_allow_html=True)
+
+    # 2. Caja de texto
     st.markdown("""
         <div class="perfil-texto" style="font-size: 17px; line-height: 1.6; text-align: justify; padding: 25px; background: rgba(17, 34, 64, 0.6); border-radius: 15px; border: 1px solid rgba(0, 242, 255, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin: 0;">
             Soy un joven de 25 años profundamente apasionado por la tecnología y la ciberseguridad. Actualmente me encuentro cursando mi <b>último año de la carrera de Ingeniería en Ciberseguridad y Auditoría Informática</b>. 
