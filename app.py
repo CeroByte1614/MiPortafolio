@@ -78,39 +78,36 @@ habilidades = {
 }
 
 # --- 4. ESTILOS CSS GENERALES ---
-# Aseguramos que haya un string base64 válido aunque esté vacío
 fondo_b64 = bg_img if bg_img else ""
 tarjeta_b64 = bg_card_img if bg_card_img else ""
 
 st.markdown(f"""
     <style>
-    /* Ocultar elementos por defecto de Streamlit */
     header {{visibility: hidden !important;}}
     .main .block-container {{ padding-top: 0rem; padding-bottom: 0rem; }}
     #MainMenu, footer {{visibility: hidden !important;}}
     
-    /* Configuración Clave del Fondo Principal */
+    /* Fondo Principal - Ahora sin candados de posición */
     .stApp {{
-        /* IMPORTANTE: Usamos un data URI más genérico y aseguramos que lea la variable */
-        background: linear-gradient(rgba(5, 10, 48, 0.95), rgba(0, 0, 0, 0.95)), url("data:image/jpeg;base64,{fondo_b64}");
-        background-size: 140% 140% !important; 
-        background-position: left center !important;
-        background-attachment: fixed !important;
+        background-image: linear-gradient(rgba(5, 10, 48, 0.95), rgba(0, 0, 0, 0.95)), url("data:image/jpeg;base64,{fondo_b64}");
+        background-size: 150% 150% !important; /* Más grande para que el movimiento se note */
         color: white !important;
-        animation: moverFondo 30s ease-in-out infinite alternate !important;
+        /* Le damos el control total a la animación */
+        animation: moverFondo 25s linear infinite alternate !important;
     }}
     
-    /* Animación más suave y compatible */
+    /* La animación que mueve el fondo de 0% (izquierda) a 100% (derecha) */
     @keyframes moverFondo {{
-        0% {{ background-position: left center; }}
-        100% {{ background-position: right center; }}
+        0% {{ background-position: 0% 50%; }}
+        100% {{ background-position: 100% 50%; }}
     }}
 
+    /* En celulares apagamos la animación para no consumir batería */
     @media (max-width: 640px) {{
         .stApp {{
             background-size: cover !important; 
             background-position: center center !important; 
-            animation: none !important; /* Desactiva en móviles por rendimiento */
+            animation: none !important;
         }}
     }}
 
