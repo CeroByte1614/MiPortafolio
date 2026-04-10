@@ -78,35 +78,42 @@ habilidades = {
 }
 
 # --- 4. ESTILOS CSS GENERALES ---
+# Aseguramos que haya un string base64 válido aunque esté vacío
+fondo_b64 = bg_img if bg_img else ""
+tarjeta_b64 = bg_card_img if bg_card_img else ""
+
 st.markdown(f"""
     <style>
-    header {{visibility: hidden;}}
+    /* Ocultar elementos por defecto de Streamlit */
+    header {{visibility: hidden !important;}}
     .main .block-container {{ padding-top: 0rem; padding-bottom: 0rem; }}
-    #MainMenu, footer {{visibility: hidden;}}
+    #MainMenu, footer {{visibility: hidden !important;}}
     
-    /* Fondo Principal con Movimiento Restaurado */
+    /* Configuración Clave del Fondo Principal */
     .stApp {{
-        background-image: linear-gradient(rgba(5, 10, 48, 0.95), rgba(0, 0, 0, 0.95)), url("data:image/jpeg;base64,{bg_img if bg_img else ''}");
-        background-size: 140% 140%; /* Ampliado para que pueda moverse */
-        background-repeat: no-repeat;
+        /* IMPORTANTE: Usamos un data URI más genérico y aseguramos que lea la variable */
+        background: linear-gradient(rgba(5, 10, 48, 0.95), rgba(0, 0, 0, 0.95)), url("data:image/jpeg;base64,{fondo_b64}");
+        background-size: 140% 140% !important; 
+        background-position: left center !important;
+        background-attachment: fixed !important;
         color: white !important;
-        animation: moveBackground 30s ease-in-out infinite; /* ¡Aquí vuelve la magia! */
+        animation: moverFondo 30s ease-in-out infinite alternate !important;
     }}
     
+    /* Animación más suave y compatible */
+    @keyframes moverFondo {{
+        0% {{ background-position: left center; }}
+        100% {{ background-position: right center; }}
+    }}
+
     @media (max-width: 640px) {{
         .stApp {{
-            /* En celulares es mejor que se quede quieto para que no consuma batería, pero cubrirá todo */
             background-size: cover !important; 
             background-position: center center !important; 
-            animation: none !important;
+            animation: none !important; /* Desactiva en móviles por rendimiento */
         }}
     }}
 
-    @keyframes moveBackground {{
-        0% {{ background-position: 0% 50%; }}
-        50% {{ background-position: 100% 50%; }}
-        100% {{ background-position: 0% 50%; }}
-    }}
     @keyframes fadeIn {{ 0% {{ opacity: 0; }} 100% {{ opacity: 1; }} }}
     @keyframes slideIn {{ 0% {{ transform: translateX(100px); opacity: 0; }} 100% {{ transform: translateX(0); opacity: 1; }} }}
     
@@ -126,7 +133,7 @@ st.markdown(f"""
 
     /* CSS Tarjetas de Experiencia */
     .exp-card {{
-        background-image: linear-gradient(rgba(17, 34, 64, 0.85), rgba(17, 34, 64, 0.85)), url("data:image/jpeg;base64,{bg_card_img if bg_card_img else ''}");
+        background: linear-gradient(rgba(17, 34, 64, 0.85), rgba(17, 34, 64, 0.85)), url("data:image/jpeg;base64,{tarjeta_b64}");
         background-size: cover; background-position: center; padding: 40px; border-radius: 20px;
         border: 2px solid rgba(0, 242, 255, 0.3); backdrop-filter: blur(12px);
         animation: slideIn 0.8s ease-out, fadeIn 1.2s ease-out;
