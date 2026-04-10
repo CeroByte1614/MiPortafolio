@@ -10,21 +10,20 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# MEJORA: Esta función ahora asegura que la imagen se busque en la misma ruta del script
 def get_base64(bin_file):
     ruta_completa = os.path.join(os.path.dirname(__file__), bin_file)
     if os.path.exists(ruta_completa):
         with open(ruta_completa, 'rb') as f:
             data = f.read()
         return base64.b64encode(data).decode()
-    return "" # Si falla, devuelve vacío para no romper el código
+    return ""
 
 # --- 2. CARGA DE RECURSOS ---
 bg_img = get_base64('imagenciberseguridad.jpg')
 perfil_img = get_base64('imagencarlos.jpg')
 bg_card_img = get_base64('imagenciberseguridad2.jpg')
 icon_habilidades_img = get_base64('iconohabilidades.png')
-img_sobre_mi = get_base64('imagensobremi.jpg') # <-- Solo esta imagen, tal como pediste
+img_sobre_mi = get_base64('imagensobremi.jpg')
 
 # --- 3. DATOS ---
 experiencias = [
@@ -77,35 +76,43 @@ habilidades = {
     "Normativas y Frameworks": "Conocimiento académico en ISO 27001 y NIST Cybersecurity Framework."
 }
 
-# --- 4. ESTILOS CSS GENERALES ---
+# --- 4. ESTILOS CSS GENERALES Y FONDO ANIMADO ---
 st.markdown(f"""
     <style>
-    /* Ocultar UI de Streamlit */
     header {{visibility: hidden !important;}}
-    .main .block-container {{ padding-top: 2rem !important; padding-bottom: 0rem; z-index: 10; position: relative; }}
     #MainMenu, footer {{visibility: hidden !important;}}
+    .main .block-container {{ padding-top: 2rem !important; padding-bottom: 0rem; z-index: 10; position: relative; }}
     
-    /* FONDO PRINCIPAL SEGURO Y ANIMADO */
+    /* Hace transparente la capa de la app para ver el fondo */
     .stApp {{
-        background-image: linear-gradient(rgba(5, 10, 48, 0.95), rgba(0, 0, 0, 0.95)), url("data:image/jpeg;base64,{bg_img}") !important;
-        background-size: 200% 200% !important; 
-        background-repeat: no-repeat !important;
+        background: transparent !important;
         color: white !important;
-        animation: moverFondo 30s linear infinite alternate !important;
     }}
     
-    @keyframes moverFondo {{
-        0% {{ background-position: 0% 50%; }}
-        100% {{ background-position: 100% 50%; }}
+    /* FONDO ANIMADO INYECTADO */
+    body::before {{
+        content: "";
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        z-index: -1;
+        background-image: linear-gradient(rgba(5, 10, 48, 0.95), rgba(0, 0, 0, 0.95)), url("data:image/jpeg;base64,{bg_img}");
+        background-size: 200vw auto; 
+        background-position: left center;
+        background-repeat: no-repeat;
+        animation: deslizarFondo 30s linear infinite alternate;
+    }}
+    
+    @keyframes deslizarFondo {{
+        0% {{ background-position: left center; }}
+        100% {{ background-position: right center; }}
     }}
 
     @media (max-width: 640px) {{
-        .stApp {{
-            background-size: cover !important; 
-            background-position: center center !important; 
-            animation: none !important;
+        body::before {{
+            background-size: cover;
+            background-position: center center;
+            animation: none;
         }}
-        .main .block-container {{ padding-top: 1rem !important; }}
     }}
 
     /* CSS Nav Menu */
@@ -133,15 +140,28 @@ st.markdown(f"""
         transform: scale(1.02); border: 2px solid #00f2ff; box-shadow: 0 0 35px rgba(0, 242, 255, 0.5);
     }}
     
-    /* CSS Tags de Habilidades */
+    /* CSS Tags de Habilidades (CORREGIDO) */
+    .habilidades-container {{
+        /* Necesario para que el tooltip no se corte */
+        position: relative; 
+        z-index: 20; 
+    }}
     .skill-tag {{
         background: rgba(0, 242, 255, 0.1); border: 1px solid #00f2ff; padding: 6px 14px; 
         border-radius: 15px; display: inline-block; margin: 5px; font-size: 14px;
         position: relative; cursor: pointer; color: white !important; font-weight: bold !important; transition: all 0.3s ease;
     }}
-    .skill-tag:hover {{ background: rgba(0, 242, 255, 0.3); transform: translateY(-2px); box-shadow: 0 0 10px rgba(0, 242, 255, 0.5); }}
-    
-    /* ESTA ES LA CLASE MAGICA PARA EL ZOOM EN SOBRE MÍ */
+    .skill-tag:hover {{ background: rgba(0, 242, 255, 0.3); transform: translateY(-2px); box-shadow: 0 0 10px rgba(0, 242, 255, 0.5); z-index: 100; }}
+    .skill-tag:hover::after {{
+        content: attr(data-description); position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.95); color: #050a30; padding: 10px; border-radius: 8px; width: 220px;
+        font-size: 13px; font-weight: bold; text-align: center; z-index: 1000; box-shadow: 0 0 15px rgba(0, 242, 255, 0.6);
+        border: 1px solid #00f2ff; white-space: normal; line-height: 1.4;
+        /* Pequeña flecha apuntando hacia abajo */
+        border-bottom-color: transparent; 
+    }}
+
+    /* EFECTO ZOOM PARA "SOBRE MÍ" */
     .efecto-zoom {{
         transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease !important;
         cursor: default;
@@ -215,7 +235,7 @@ st.markdown(f"""
         <div class="experience-para">
             <span class="highlight">+4 años de experiencia</span>. 
             Estudiante de <span class="highlight">Ingeniería en Ciberseguridad</span> y Auditoría Informática 
-            de Santiago de Chile. Especializado en el área de <span class="highlight">soporte técnico, infraestructura TI</span> 
+            de Santiago de Chile cl. Especializado en el área de <span class="highlight">soporte técnico, infraestructura TI</span> 
             y gestión de identidades (IAM). Apasionado por crear soluciones seguras que generen valor real.
         </div>
     </div>
@@ -271,8 +291,10 @@ with c2:
             <span style="color: #00f2ff; font-size: 28px; font-weight: bold;">Habilidades Técnicas</span>
         </div>
     """, unsafe_allow_html=True)
+    
+    # APLICAMOS EL CONTENEDOR PARA LAS HABILIDADES
     html_habilidades = "".join([f'<span class="skill-tag" data-description="{desc}">{nombre}</span> ' for nombre, desc in habilidades.items()])
-    st.markdown(html_habilidades, unsafe_allow_html=True)
+    st.markdown(f'<div class="habilidades-container">{html_habilidades}</div>', unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 st.markdown("---")
@@ -288,19 +310,18 @@ with col_texto:
         </div>
     """, unsafe_allow_html=True)
 
-    # TEXTO CON LA CLASE 'efecto-zoom'
     st.markdown("""
         <div class="efecto-zoom" style="font-size: 17px; line-height: 1.6; text-align: justify; padding: 25px; background: rgba(17, 34, 64, 0.6); border-radius: 15px; border: 1px solid rgba(0, 242, 255, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin: 0;">
             Soy un joven de 25 años profundamente apasionado por la tecnología y la ciberseguridad. Actualmente me encuentro cursando mi <b style="color: #fffd8d;">último año de la carrera de Ingeniería en Ciberseguridad y Auditoría Informática</b>. 
             <br><br>
             Me considero una persona proactiva y en constante aprendizaje; disfruto expandiendo mis conocimientos analíticos y técnicos, explorando siempre nuevas herramientas y metodologías dentro del mundo de la seguridad de la información. Cuando me alejo de las pantallas, <b style="color: #fffd8d;">mi otra gran pasión es el fútbol</b>, un deporte que disfruto muchísimo y que me ayuda a mantener un buen equilibrio, liberar estrés y aplicar el valor del trabajo en equipo en mi día a día.
             <br><br>
+            A lo largo de mi trayectoria, he consolidado más de 4 años de experiencia en soporte técnico, infraestructura TI y gestión de identidades (IAM). Me especializo en el endurecimiento de sistemas (Hardening), redes bajo el modelo OSI y respuesta a incidentes (N1/N2). Mi objetivo profesional es seguir enfrentando nuevos desafíos e implementar soluciones que protejan los activos críticos bajo los más altos estándares operativos.
         </div>
     """, unsafe_allow_html=True)
 
 with col_img:
     if img_sobre_mi:
-        # IMAGEN CON LA CLASE 'efecto-zoom'
         st.markdown(f"""
             <div style="display: flex; justify-content: center; align-items: center; height: 100%; padding-top: 50px;">
                 <img class="efecto-zoom" src="data:image/jpeg;base64,{img_sobre_mi}" style="width: 100%; max-width: 380px; height: auto; border-radius: 15px; border: 2px solid rgba(0, 242, 255, 0.2); box-shadow: 0 0 20px rgba(0, 242, 255, 0.1); object-fit: cover;">
