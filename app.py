@@ -177,7 +177,6 @@ st.markdown(f"""
         <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" style="width: 32px; transition: transform 0.3s ease;">
     </a>
 </div>
-<div style="position: fixed; top: 25px; left: 25px; color: white; font-weight: bold; font-size: 24px; z-index: 9999; font-family: 'Segoe UI', sans-serif; text-shadow: 0 0 5px rgba(0,0,0,0.5);">Mi Portafolio</div>
 """, unsafe_allow_html=True)
 
 # --- 6. MENÚ DE NAVEGACIÓN ---
