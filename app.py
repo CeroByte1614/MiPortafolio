@@ -25,6 +25,7 @@ perfil_img = get_base64('imagencarlos.jpg')
 bg_card_img = get_base64('imagenciberseguridad2.jpg')
 icon_habilidades_img = get_base64(os.path.join(ruta_base, 'iconohabilidades.png'))
 img_sobre_mi = get_base64('imagensobremi.jpg')
+img_sobre_mi = get_base64('imagentextosobremi.jpg')
 
 # --- 3. DATOS ---
 experiencias = [
@@ -302,7 +303,6 @@ with col_texto:
             <br><br>
             Me considero una persona proactiva y en constante aprendizaje; disfruto expandiendo mis conocimientos analíticos y técnicos, explorando siempre nuevas herramientas y metodologías dentro del mundo de la seguridad de la información. Cuando me alejo de las pantallas, <b style="color: #fffd8d;">mi otra gran pasión es el fútbol</b>, un deporte que disfruto muchísimo y que me ayuda a mantener un buen equilibrio, liberar estrés y aplicar el valor del trabajo en equipo en mi día a día.
             <br><br>
-            A lo largo de mi trayectoria, he consolidado más de 4 años de experiencia en soporte técnico, infraestructura TI y gestión de identidades (IAM). Me especializo en el endurecimiento de sistemas (Hardening), redes bajo el modelo OSI y respuesta a incidentes (N1/N2). Mi objetivo profesional es seguir enfrentando nuevos desafíos e implementar soluciones que protejan los activos críticos bajo los más altos estándares operativos.
         </div>
     """, unsafe_allow_html=True)
 
