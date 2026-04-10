@@ -215,7 +215,7 @@ st.markdown(f"""
         <div class="experience-para">
             <span class="highlight">+4 años de experiencia</span>. 
             Estudiante de <span class="highlight">Ingeniería en Ciberseguridad</span> y Auditoría Informática 
-            de Santiago de Chile cl. Especializado en el área de <span class="highlight">soporte técnico, infraestructura TI</span> 
+            de Santiago de Chile. Especializado en el área de <span class="highlight">soporte técnico, infraestructura TI</span> 
             y gestión de identidades (IAM). Apasionado por crear soluciones seguras que generen valor real.
         </div>
     </div>
@@ -295,7 +295,6 @@ with col_texto:
             <br><br>
             Me considero una persona proactiva y en constante aprendizaje; disfruto expandiendo mis conocimientos analíticos y técnicos, explorando siempre nuevas herramientas y metodologías dentro del mundo de la seguridad de la información. Cuando me alejo de las pantallas, <b style="color: #fffd8d;">mi otra gran pasión es el fútbol</b>, un deporte que disfruto muchísimo y que me ayuda a mantener un buen equilibrio, liberar estrés y aplicar el valor del trabajo en equipo en mi día a día.
             <br><br>
-            A lo largo de mi trayectoria, he consolidado más de 4 años de experiencia en soporte técnico, infraestructura TI y gestión de identidades (IAM). Me especializo en el endurecimiento de sistemas (Hardening), redes bajo el modelo OSI y respuesta a incidentes (N1/N2). Mi objetivo profesional es seguir enfrentando nuevos desafíos e implementar soluciones que protejan los activos críticos bajo los más altos estándares operativos.
         </div>
     """, unsafe_allow_html=True)
 
