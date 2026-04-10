@@ -374,22 +374,10 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# --- 7. SECCIÓN EXPERIENCIA (Aquí continúan tus columnas) ---
-col_prev, col_card, col_next = st.columns([1, 8, 1], vertical_alignment="center")
-
-st.markdown(f"""
-    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 25px; padding-left: 10px;">
-        <img src="https://cdn-icons-png.flaticon.com/512/2092/2092204.png" width="35" height="35" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
-        <h2 style="margin: 0; color: #00f2ff; font-size: 32px; font-family: 'Segoe UI', sans-serif;">Experiencia</h2>
-    </div>
-""", unsafe_allow_html=True)
-
-col_prev, col_card, col_next = st.columns([1, 8, 1], vertical_alignment="center")
-
-# 2. EL BOTÓN ANTERIOR (Reemplaza lo que hay dentro de col_prev)
 # --- 7. SECCIÓN EXPERIENCIA ---
+st.markdown("<br><br>", unsafe_allow_html=True)
 
-# 1. EL TÍTULO (Pégalo justo aquí)
+# Título Único con ícono de Escudo Proactivo
 st.markdown(f"""
     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 25px; padding-left: 10px;">
         <img src="https://cdn-icons-png.flaticon.com/512/2092/2092204.png" width="35" height="35" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
@@ -397,9 +385,9 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
+# Columnas para los botones y la tarjeta
 col_prev, col_card, col_next = st.columns([1, 8, 1], vertical_alignment="center")
 
-# 2. EL BOTÓN ANTERIOR (Reemplaza lo que hay dentro de col_prev)
 with col_prev:
     st.markdown("""
         <div style="display: flex; justify-content: flex-end; align-items: center; height: 100%; min-width: 80px;">
@@ -419,8 +407,27 @@ with col_prev:
         st.session_state.exp_index = (st.session_state.exp_index - 1) % len(experiencias)
         st.session_state.last_refresh = time.time()
         st.rerun()
-        
     st.markdown("</div>", unsafe_allow_html=True)
+
+with col_card:
+    exp = experiencias[st.session_state.exp_index]
+    puntos_html = "".join([f"<li>{p}</li>" for p in exp['puntos']])
+    
+    st.container(key=f"card_{st.session_state.exp_index}").markdown(f"""
+    <div class="exp-card">
+        <h2 style='text-align: left;'>{exp['titulo']}</h2>
+        <p style='color:#00f2ff; font-size: 18px; text-align: left;'><b>{exp['periodo']}</b></p>
+        <ul style='font-size: 17px; line-height: 1.6; color: #f0f0f0; text-align: left;'>{puntos_html}</ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col_next:
+    st.markdown('<div style="text-align: left; white-space: nowrap;">', unsafe_allow_html=True)
+    if st.button("Siguiente ❯", key="next_btn"):
+        st.session_state.exp_index = (st.session_state.exp_index + 1) % len(experiencias)
+        st.session_state.last_refresh = time.time()
+        st.rerun()
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # --- 8. EDUCACIÓN Y HABILIDADES ---
 st.markdown("---")
