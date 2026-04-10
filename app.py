@@ -83,34 +83,52 @@ tarjeta_b64 = bg_card_img if bg_card_img else ""
 
 st.markdown(f"""
     <style>
+    /* Ocultamos las barras de herramientas de Streamlit */
     header {{visibility: hidden !important;}}
-    .main .block-container {{ padding-top: 0rem; padding-bottom: 0rem; }}
+    .main .block-container {{ padding-top: 0rem; padding-bottom: 0rem; z-index: 10; position: relative; }}
     #MainMenu, footer {{visibility: hidden !important;}}
     
-    /* Fondo Principal - Ahora sin candados de posición */
-    .stApp {{
+    /* EL SECRETO: Creamos un pseudo-elemento para el fondo animado */
+    .stApp::before {{
+        content: "";
+        position: fixed; /* Lo fijamos a la pantalla */
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        z-index: -1; /* Lo enviamos al fondo absoluto */
+        
+        /* Aplicamos el gradiente y la imagen */
         background-image: linear-gradient(rgba(5, 10, 48, 0.95), rgba(0, 0, 0, 0.95)), url("data:image/jpeg;base64,{fondo_b64}");
-        background-size: 150% 150% !important; /* Más grande para que el movimiento se note */
-        color: white !important;
-        /* Le damos el control total a la animación */
-        animation: moverFondo 25s linear infinite alternate !important;
+        
+        /* Hacemos la imagen mucho más ancha que la pantalla para que pueda viajar */
+        background-size: 150vw auto; 
+        background-position: left center;
+        background-repeat: no-repeat;
+        
+        /* Ejecutamos la animación */
+        animation: deslizarFondo 30s linear infinite alternate;
     }}
     
-    /* La animación que mueve el fondo de 0% (izquierda) a 100% (derecha) */
-    @keyframes moverFondo {{
-        0% {{ background-position: 0% 50%; }}
-        100% {{ background-position: 100% 50%; }}
+    /* Animación de paneo horizontal */
+    @keyframes deslizarFondo {{
+        0% {{ background-position: left center; }}
+        100% {{ background-position: right center; }}
     }}
 
-    /* En celulares apagamos la animación para no consumir batería */
+    /* Estilos base del texto */
+    .stApp {{
+        color: white !important;
+        background-color: transparent !important; /* Para que deje ver el pseudo-elemento */
+    }}
+
+    /* Control para móviles: apagamos el movimiento para evitar mareos y lag */
     @media (max-width: 640px) {{
-        .stApp {{
-            background-size: cover !important; 
-            background-position: center center !important; 
-            animation: none !important;
+        .stApp::before {{
+            background-size: cover;
+            background-position: center center;
+            animation: none; /* Apagado en celular */
         }}
     }}
 
+    /* Animaciones de entrada para las tarjetas */
     @keyframes fadeIn {{ 0% {{ opacity: 0; }} 100% {{ opacity: 1; }} }}
     @keyframes slideIn {{ 0% {{ transform: translateX(100px); opacity: 0; }} 100% {{ transform: translateX(0); opacity: 1; }} }}
     
