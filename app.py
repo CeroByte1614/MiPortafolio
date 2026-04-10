@@ -83,59 +83,52 @@ tarjeta_b64 = bg_card_img if bg_card_img else ""
 
 st.markdown(f"""
     <style>
-    /* Ocultamos las barras de herramientas de Streamlit */
-    header {{visibility: hidden !important;}}
-    .main .block-container {{ padding-top: 0rem; padding-bottom: 0rem; z-index: 10; position: relative; }}
+    /* Ocultamos las barras de Streamlit y quitamos su altura */
+    header {{visibility: hidden !important; height: 0px !important;}}
+    
+    /* ACÁ ESTÁ EL TRUCO: Forzamos a que el contenedor principal casi no tenga margen arriba */
+    .main .block-container {{ padding-top: 2rem !important; padding-bottom: 0rem; z-index: 10; position: relative; }}
     #MainMenu, footer {{visibility: hidden !important;}}
     
-    /* EL SECRETO: Creamos un pseudo-elemento para el fondo animado */
+    /* Pseudo-elemento para el fondo animado */
     .stApp::before {{
         content: "";
-        position: fixed; /* Lo fijamos a la pantalla */
+        position: fixed; 
         top: 0; left: 0; width: 100vw; height: 100vh;
-        z-index: -1; /* Lo enviamos al fondo absoluto */
-        
-        /* Aplicamos el gradiente y la imagen */
+        z-index: -1; 
         background-image: linear-gradient(rgba(5, 10, 48, 0.95), rgba(0, 0, 0, 0.95)), url("data:image/jpeg;base64,{fondo_b64}");
-        
-        /* Hacemos la imagen mucho más ancha que la pantalla para que pueda viajar */
         background-size: 150vw auto; 
         background-position: left center;
         background-repeat: no-repeat;
-        
-        /* Ejecutamos la animación */
         animation: deslizarFondo 30s linear infinite alternate;
     }}
     
-    /* Animación de paneo horizontal */
     @keyframes deslizarFondo {{
         0% {{ background-position: left center; }}
         100% {{ background-position: right center; }}
     }}
 
-    /* Estilos base del texto */
     .stApp {{
         color: white !important;
-        background-color: transparent !important; /* Para que deje ver el pseudo-elemento */
+        background-color: transparent !important; 
     }}
 
-    /* Control para móviles: apagamos el movimiento para evitar mareos y lag */
     @media (max-width: 640px) {{
         .stApp::before {{
             background-size: cover;
             background-position: center center;
-            animation: none; /* Apagado en celular */
+            animation: none; 
         }}
+        .main .block-container {{ padding-top: 1rem !important; }}
     }}
 
-    /* Animaciones de entrada para las tarjetas */
     @keyframes fadeIn {{ 0% {{ opacity: 0; }} 100% {{ opacity: 1; }} }}
     @keyframes slideIn {{ 0% {{ transform: translateX(100px); opacity: 0; }} 100% {{ transform: translateX(0); opacity: 1; }} }}
     
-    /* CSS Nav Menu */
+    /* CSS Nav Menu - Redujimos el margen superior para acercarlo a los íconos */
     .nav-bar {{
         display: flex; justify-content: center; flex-wrap: wrap; gap: 25px;
-        margin-top: 15px; margin-bottom: 40px; padding-bottom: 15px;
+        margin-top: 5px; margin-bottom: 35px; padding-bottom: 15px;
         border-bottom: 1px solid rgba(0, 242, 255, 0.2);
     }}
     .nav-link {{
@@ -175,8 +168,9 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # --- 5. SOCIAL HEADER ---
+# Agregamos margin-top negativo (-40px) para "jalar" los íconos hacia arriba
 st.markdown(f"""
-<div style="display: flex; justify-content: flex-end; gap: 25px; padding: 10px 20px 0 0; flex-wrap: wrap;">
+<div style="display: flex; justify-content: flex-end; gap: 25px; padding: 0; margin-top: -40px; flex-wrap: wrap;">
     <a href="https://www.linkedin.com/in/carlos-e-soto-v%C3%A1squez-8366b3241" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" style="width: 32px; transition: transform 0.3s ease;">
     </a>
