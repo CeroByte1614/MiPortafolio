@@ -304,30 +304,26 @@ with col_texto:
             cursor: pointer;
         }}
         .efecto-zoom:hover {{
-            transform: scale(1.08) !important; /* Agranda la imagen y el recuadro un 8% */
+            transform: scale(1.06) !important; /* Agranda un 6% para que sea suave */
             box-shadow: 0 0 35px rgba(0, 242, 255, 0.6) !important;
             border-color: #00f2ff !important;
         }}
         </style>
         
         <div class="efecto-zoom" style="font-size: 17px; line-height: 1.6; text-align: justify; padding: 25px; background: rgba(17, 34, 64, 0.6); border-radius: 15px; border: 1px solid rgba(0, 242, 255, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin: 0;">
-            
-            <img class="efecto-zoom" src="data:image/jpeg;base64,{img_interior}" style="width: 170px; height: auto; float: right; margin: 0 0 15px 25px; border-radius: 10px; border: 1px solid #00f2ff; box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);">
-            
             Soy un joven de 25 años profundamente apasionado por la tecnología y la ciberseguridad. Actualmente me encuentro cursando mi <b style="color: #fffd8d;">último año de la carrera de Ingeniería en Ciberseguridad y Auditoría Informática</b>. 
             <br><br>
             Me considero una persona proactiva y en constante aprendizaje; disfruto expandiendo mis conocimientos analíticos y técnicos, explorando siempre nuevas herramientas y metodologías dentro del mundo de la seguridad de la información. Cuando me alejo de las pantallas, <b style="color: #fffd8d;">mi otra gran pasión es el fútbol</b>, un deporte que disfruto muchísimo y que me ayuda a mantener un buen equilibrio, liberar estrés y aplicar el valor del trabajo en equipo en mi día a día.
             <br><br>
             A lo largo de mi trayectoria, he consolidado más de 4 años de experiencia en soporte técnico, infraestructura TI y gestión de identidades (IAM). Me especializo en el endurecimiento de sistemas (Hardening), redes bajo el modelo OSI y respuesta a incidentes (N1/N2). Mi objetivo profesional es seguir enfrentando nuevos desafíos e implementar soluciones que protejan los activos críticos bajo los más altos estándares operativos.
-            
-            <div style="clear: both;"></div> </div>
+        </div>
     """, unsafe_allow_html=True)
 
 with col_img:
-    if img_exterior:
+    if img_sobre_mi:
         st.markdown(f"""
             <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                <img class="efecto-zoom" src="data:image/jpeg;base64,{img_exterior}" style="width: 100%; max-width: 380px; height: auto; border-radius: 15px; border: 2px solid #00f2ff; box-shadow: 0 0 20px rgba(0, 242, 255, 0.3); object-fit: cover;">
+                <img class="efecto-zoom" src="data:image/jpeg;base64,{img_sobre_mi}" style="width: 100%; max-width: 380px; height: auto; border-radius: 15px; border: 2px solid #00f2ff; box-shadow: 0 0 20px rgba(0, 242, 255, 0.3); object-fit: cover;">
             </div>
         """, unsafe_allow_html=True)
 
