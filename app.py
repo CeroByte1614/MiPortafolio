@@ -1,7 +1,6 @@
 import streamlit as st
 import base64
 import os
-import time
 
 # --- 1. CONFIGURACIÓN Y FUNCIONES ---
 st.set_page_config(
@@ -11,21 +10,21 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+# MEJORA: Esta función ahora asegura que la imagen se busque en la misma ruta del script
 def get_base64(bin_file):
-    if os.path.exists(bin_file):
-        with open(bin_file, 'rb') as f:
+    ruta_completa = os.path.join(os.path.dirname(__file__), bin_file)
+    if os.path.exists(ruta_completa):
+        with open(ruta_completa, 'rb') as f:
             data = f.read()
         return base64.b64encode(data).decode()
-    return None
+    return "" # Si falla, devuelve vacío para no romper el código
 
 # --- 2. CARGA DE RECURSOS ---
-ruta_base = os.path.dirname(__file__)
 bg_img = get_base64('imagenciberseguridad.jpg')
 perfil_img = get_base64('imagencarlos.jpg')
 bg_card_img = get_base64('imagenciberseguridad2.jpg')
-icon_habilidades_img = get_base64(os.path.join(ruta_base, 'iconohabilidades.png'))
-img_sobre_mi = get_base64('imagensobremi.jpg')
-img_sobre_mi = get_base64('imagentextosobremi.jpg')
+icon_habilidades_img = get_base64('iconohabilidades.png')
+img_sobre_mi = get_base64('imagensobremi.jpg') # <-- Solo esta imagen, tal como pediste
 
 # --- 3. DATOS ---
 experiencias = [
@@ -79,26 +78,22 @@ habilidades = {
 }
 
 # --- 4. ESTILOS CSS GENERALES ---
-fondo_b64 = bg_img if bg_img else ""
-tarjeta_b64 = bg_card_img if bg_card_img else ""
-
 st.markdown(f"""
     <style>
-    /* Ocultar elementos por defecto de Streamlit y el margen superior */
+    /* Ocultar UI de Streamlit */
     header {{visibility: hidden !important;}}
     .main .block-container {{ padding-top: 2rem !important; padding-bottom: 0rem; z-index: 10; position: relative; }}
     #MainMenu, footer {{visibility: hidden !important;}}
     
-    /* FONDO PRINCIPAL: Directo al .stApp (como funcionaba antes) pero con espacio para moverse */
+    /* FONDO PRINCIPAL SEGURO Y ANIMADO */
     .stApp {{
-        background-image: linear-gradient(rgba(5, 10, 48, 0.95), rgba(0, 0, 0, 0.95)), url("data:image/jpeg;base64,{fondo_b64}") !important;
-        background-size: 200% 200% !important; /* Lo hacemos el doble de grande para que pueda "viajar" */
+        background-image: linear-gradient(rgba(5, 10, 48, 0.95), rgba(0, 0, 0, 0.95)), url("data:image/jpeg;base64,{bg_img}") !important;
+        background-size: 200% 200% !important; 
         background-repeat: no-repeat !important;
         color: white !important;
         animation: moverFondo 30s linear infinite alternate !important;
     }}
     
-    /* Animación de paneo horizontal sin el !important que a veces rompen los navegadores */
     @keyframes moverFondo {{
         0% {{ background-position: 0% 50%; }}
         100% {{ background-position: 100% 50%; }}
@@ -108,14 +103,11 @@ st.markdown(f"""
         .stApp {{
             background-size: cover !important; 
             background-position: center center !important; 
-            animation: none !important; /* Apagado en celular */
+            animation: none !important;
         }}
         .main .block-container {{ padding-top: 1rem !important; }}
     }}
 
-    @keyframes fadeIn {{ 0% {{ opacity: 0; }} 100% {{ opacity: 1; }} }}
-    @keyframes slideIn {{ 0% {{ transform: translateX(100px); opacity: 0; }} 100% {{ transform: translateX(0); opacity: 1; }} }}
-    
     /* CSS Nav Menu */
     .nav-bar {{
         display: flex; justify-content: center; flex-wrap: wrap; gap: 25px;
@@ -132,10 +124,9 @@ st.markdown(f"""
 
     /* CSS Tarjetas de Experiencia */
     .exp-card {{
-        background: linear-gradient(rgba(17, 34, 64, 0.85), rgba(17, 34, 64, 0.85)), url("data:image/jpeg;base64,{tarjeta_b64}");
+        background: linear-gradient(rgba(17, 34, 64, 0.85), rgba(17, 34, 64, 0.85)), url("data:image/jpeg;base64,{bg_card_img}");
         background-size: cover; background-position: center; padding: 40px; border-radius: 20px;
         border: 2px solid rgba(0, 242, 255, 0.3); backdrop-filter: blur(12px);
-        animation: slideIn 0.8s ease-out, fadeIn 1.2s ease-out;
         transition: transform 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
     }}
     .exp-card:hover {{
@@ -149,17 +140,22 @@ st.markdown(f"""
         position: relative; cursor: pointer; color: white !important; font-weight: bold !important; transition: all 0.3s ease;
     }}
     .skill-tag:hover {{ background: rgba(0, 242, 255, 0.3); transform: translateY(-2px); box-shadow: 0 0 10px rgba(0, 242, 255, 0.5); }}
-    .skill-tag:hover::after {{
-        content: attr(data-description); position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%);
-        background: rgba(255, 255, 255, 0.95); color: #050a30; padding: 10px; border-radius: 8px; width: 200px;
-        font-size: 12px; font-weight: bold; text-align: center; z-index: 1000; box-shadow: 0 0 15px rgba(0, 242, 255, 0.6);
-        border: 1px solid #00f2ff; white-space: normal; line-height: 1.4;
+    
+    /* ESTA ES LA CLASE MAGICA PARA EL ZOOM EN SOBRE MÍ */
+    .efecto-zoom {{
+        transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease !important;
+        cursor: default;
+    }}
+    .efecto-zoom:hover {{
+        transform: scale(1.04) !important;
+        box-shadow: 0 0 35px rgba(0, 242, 255, 0.6) !important;
+        border-color: #00f2ff !important;
+        z-index: 50;
     }}
     </style>
 """, unsafe_allow_html=True)
 
 # --- 5. SOCIAL HEADER ---
-# Agregamos margin-top negativo (-40px) para "jalar" los íconos hacia arriba
 st.markdown(f"""
 <div style="display: flex; justify-content: flex-end; gap: 25px; padding: 0; margin-top: -40px; flex-wrap: wrap;">
     <a href="https://www.linkedin.com/in/carlos-e-soto-v%C3%A1squez-8366b3241" target="_blank">
@@ -225,8 +221,7 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# --- 8. SECCIÓN EXPERIENCIA (Recuadros apilados) ---
-# Nota: ID="experiencia" agregado aquí para el ancla del menú
+# --- 8. SECCIÓN EXPERIENCIA ---
 st.markdown(f"""
     <div id="experiencia" style="display: flex; align-items: center; gap: 12px; margin-bottom: 25px; padding-left: 10px;">
         <img src="https://cdn-icons-png.flaticon.com/512/2092/2092204.png" width="35" height="35" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
@@ -244,12 +239,11 @@ for exp in experiencias:
     </div>
     """, unsafe_allow_html=True)
 
-# --- 9. EDUCACIÓN Y HABILIDADES ---
+# --- 9. EDUCACIÓN Y Habilidades ---
 st.markdown("---")
 c1, c2 = st.columns(2)
 
 with c1:
-    # ID="educacion" agregado
     st.markdown(f"""
             <div id="educacion" style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
                 <img src="https://cdn-icons-png.flaticon.com/512/3135/3135810.png" width="40" height="40" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
@@ -260,7 +254,6 @@ with c1:
     st.write("Universidad San Sebastián (03/2022 - Presente)")
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # ID="certificados" agregado
     st.markdown(f"""
             <div id="certificados" style="display: flex; align-items: center; gap: 12px; margin-top: 20px; margin-bottom: 10px;">
                 <img src="https://cdn-icons-png.flaticon.com/512/2436/2436633.png" width="40" height="40" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
@@ -272,7 +265,6 @@ with c1:
         st.write(f"• {cert}")
 
 with c2:
-    # ID="habilidades" agregado
     st.markdown(f"""
         <div id="habilidades" style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
           <img src="https://cdn-icons-png.flaticon.com/512/2092/2092663.png" width="45" height="45" style="vertical-align: middle; filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
@@ -286,7 +278,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 st.markdown("---")
 
 # --- 10. TEXTO DE PERFIL / SOBRE MÍ ---
-col_texto, col_img = st.columns([1.4, 1], vertical_alignment="center")
+col_texto, col_img = st.columns([1.4, 1])
 
 with col_texto:
     st.markdown(f"""
@@ -296,20 +288,8 @@ with col_texto:
         </div>
     """, unsafe_allow_html=True)
 
-    st.markdown(f"""
-        <style>
-        /* ESTE ES EL CSS QUE CREA EL EFECTO ZOOM */
-        .efecto-zoom {{
-            transition: transform 0.4s ease, box-shadow 0.4s ease !important;
-            cursor: pointer;
-        }}
-        .efecto-zoom:hover {{
-            transform: scale(1.06) !important; /* Agranda un 6% para que sea suave */
-            box-shadow: 0 0 35px rgba(0, 242, 255, 0.6) !important;
-            border-color: #00f2ff !important;
-        }}
-        </style>
-        
+    # TEXTO CON LA CLASE 'efecto-zoom'
+    st.markdown("""
         <div class="efecto-zoom" style="font-size: 17px; line-height: 1.6; text-align: justify; padding: 25px; background: rgba(17, 34, 64, 0.6); border-radius: 15px; border: 1px solid rgba(0, 242, 255, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin: 0;">
             Soy un joven de 25 años profundamente apasionado por la tecnología y la ciberseguridad. Actualmente me encuentro cursando mi <b style="color: #fffd8d;">último año de la carrera de Ingeniería en Ciberseguridad y Auditoría Informática</b>. 
             <br><br>
@@ -321,10 +301,13 @@ with col_texto:
 
 with col_img:
     if img_sobre_mi:
+        # IMAGEN CON LA CLASE 'efecto-zoom'
         st.markdown(f"""
-            <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                <img class="efecto-zoom" src="data:image/jpeg;base64,{img_sobre_mi}" style="width: 100%; max-width: 380px; height: auto; border-radius: 15px; border: 2px solid #00f2ff; box-shadow: 0 0 20px rgba(0, 242, 255, 0.3); object-fit: cover;">
+            <div style="display: flex; justify-content: center; align-items: center; height: 100%; padding-top: 50px;">
+                <img class="efecto-zoom" src="data:image/jpeg;base64,{img_sobre_mi}" style="width: 100%; max-width: 380px; height: auto; border-radius: 15px; border: 2px solid rgba(0, 242, 255, 0.2); box-shadow: 0 0 20px rgba(0, 242, 255, 0.1); object-fit: cover;">
             </div>
         """, unsafe_allow_html=True)
+    else:
+        st.error("No se pudo cargar 'imagensobremi.jpg'. Revisa que el archivo esté en la misma carpeta que el código.")
 
 st.markdown("<br><br>", unsafe_allow_html=True)
