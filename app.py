@@ -80,21 +80,36 @@ habilidades = {
 # --- 4. ESTILOS CSS GENERALES ---
 st.markdown(f"""
     <style>
-    /* Ocultar elementos por defecto de Streamlit */
     header {{visibility: hidden;}}
     .main .block-container {{ padding-top: 0rem; padding-bottom: 0rem; }}
     #MainMenu, footer {{visibility: hidden;}}
     
-    /* Configuración del Fondo Principal */
+    /* Fondo Principal con Movimiento Restaurado */
     .stApp {{
-        /* Aseguramos que el fondo se aplique correctamente usando la variable base64 */
         background-image: linear-gradient(rgba(5, 10, 48, 0.95), rgba(0, 0, 0, 0.95)), url("data:image/jpeg;base64,{bg_img if bg_img else ''}");
-        background-size: cover; 
-        background-position: center;
-        background-attachment: fixed; /* Esto hace que el fondo se quede quieto al hacer scroll */
+        background-size: 140% 140%; /* Ampliado para que pueda moverse */
+        background-repeat: no-repeat;
         color: white !important;
+        animation: moveBackground 30s ease-in-out infinite; /* ¡Aquí vuelve la magia! */
+    }}
+    
+    @media (max-width: 640px) {{
+        .stApp {{
+            /* En celulares es mejor que se quede quieto para que no consuma batería, pero cubrirá todo */
+            background-size: cover !important; 
+            background-position: center center !important; 
+            animation: none !important;
+        }}
     }}
 
+    @keyframes moveBackground {{
+        0% {{ background-position: 0% 50%; }}
+        50% {{ background-position: 100% 50%; }}
+        100% {{ background-position: 0% 50%; }}
+    }}
+    @keyframes fadeIn {{ 0% {{ opacity: 0; }} 100% {{ opacity: 1; }} }}
+    @keyframes slideIn {{ 0% {{ transform: translateX(100px); opacity: 0; }} 100% {{ transform: translateX(0); opacity: 1; }} }}
+    
     /* CSS Nav Menu */
     .nav-bar {{
         display: flex; justify-content: center; flex-wrap: wrap; gap: 25px;
@@ -114,6 +129,7 @@ st.markdown(f"""
         background-image: linear-gradient(rgba(17, 34, 64, 0.85), rgba(17, 34, 64, 0.85)), url("data:image/jpeg;base64,{bg_card_img if bg_card_img else ''}");
         background-size: cover; background-position: center; padding: 40px; border-radius: 20px;
         border: 2px solid rgba(0, 242, 255, 0.3); backdrop-filter: blur(12px);
+        animation: slideIn 0.8s ease-out, fadeIn 1.2s ease-out;
         transition: transform 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
     }}
     .exp-card:hover {{
