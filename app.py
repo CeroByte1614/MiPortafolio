@@ -440,15 +440,6 @@ with col_texto:
         </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("""
-        <div class="perfil-texto" style="font-size: 17px; line-height: 1.6; text-align: justify; padding: 25px; background: rgba(17, 34, 64, 0.6); border-radius: 15px; border: 1px solid rgba(0, 242, 255, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin: 0;">
-            Soy un joven de 25 años profundamente apasionado por la tecnología y la ciberseguridad. Actualmente me encuentro cursando mi <b>último año de la carrera de Ingeniería en Ciberseguridad y Auditoría Informática</b>. 
-            <br><br>
-            Me considero una persona proactiva y en constante aprendizaje; disfruto expandiendo mis conocimientos analíticos y técnicos, explorando siempre nuevas herramientas y metodologías dentro del mundo de la seguridad de la información. Cuando me alejo de las pantallas, <b>mi otra gran pasión es el fútbol</b>, un deporte que disfruto muchísimo y que me ayuda a mantener un buen equilibrio, liberar estrés y aplicar el valor del trabajo en equipo en mi día a día.
-            <br><br>
-        </div>
-    """, unsafe_allow_html=True)
-
 with col_img:
     if img_sobre_mi:
         st.markdown(f"""
