@@ -77,18 +77,7 @@ habilidades = {
     "Normativas y Frameworks": "Conocimiento académico en ISO 27001 y NIST Cybersecurity Framework."
 }
 
-# --- 4. LÓGICA DE SESIÓN ---
-if 'exp_index' not in st.session_state:
-    st.session_state.exp_index = 0
-if 'last_refresh' not in st.session_state:
-    st.session_state.last_refresh = time.time()
-
-if time.time() - st.session_state.last_refresh > 15:
-    st.session_state.exp_index = (st.session_state.exp_index + 1) % len(experiencias)
-    st.session_state.last_refresh = time.time()
-    st.rerun()
-
-# --- 5. ESTILOS CSS ---
+# --- 4. ESTILOS CSS GENERALES ---
 st.markdown(f"""
     <style>
     header {{visibility: hidden;}}
@@ -109,62 +98,54 @@ st.markdown(f"""
         }}
     }}
 
-    .social-header {{ 
-        display: flex; 
-        justify-content: center; 
-        gap: 20px; 
-        flex-wrap: wrap; 
-        margin-top: 10px;
-    }}
-    .icon-white {{ width: 30px; filter: brightness(0) invert(1); transition: transform 0.3s ease; }}
-    .icon-white:hover {{ transform: scale(1.3); filter: brightness(0) invert(1) drop-shadow(0 0 10px #00f2ff); }}
-    
-    .profile-pic {{
-        width: 150px; height: 150px; border-radius: 50%; 
-        background-size: 180%; 
-        background-position: 70% 20%; 
-        background-repeat: no-repeat;
-        border: 4px solid #00f2ff; box-shadow: 0 0 20px #00f2ff; 
-        display: block; 
-        
-        /* MODIFICACIÓN: Aumentar el margen superior de 20px a 50px (o el valor deseado) */
-        margin: 50px auto 20px auto; 
-        
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }}
-    .profile-pic:hover {{
-        transform: scale(1.1);
-        box-shadow: 0 0 35px #00f2ff;
-    }}
-
-    .perfil-texto {{ 
-        max-width: 850px; margin: 20px auto; text-align: center; 
-        font-size: clamp(14px, 4vw, 18px); color: white; 
-        transition: transform 0.4s ease; 
-    }}
-    .perfil-texto:hover {{ 
-        transform: scale(1.05);
-    }}
     @keyframes moveBackground {{
         0% {{ background-position: 0% 50%; }}
         50% {{ background-position: 100% 50%; }}
         100% {{ background-position: 0% 50%; }}
     }}
-    @keyframes fadeIn {{
-        0% {{ opacity: 0; }}
-        100% {{ opacity: 1; }}
-    }}
+    @keyframes fadeIn {{ 0% {{ opacity: 0; }} 100% {{ opacity: 1; }} }}
     @keyframes slideIn {{ 0% {{ transform: translateX(100px); opacity: 0; }} 100% {{ transform: translateX(0); opacity: 1; }} }}
+    
+    /* Nav Menu CSS */
+    .nav-bar {{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 25px;
+        margin-top: 15px;
+        margin-bottom: 40px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(0, 242, 255, 0.2);
+    }}
+    .nav-link {{
+        color: #dcdcdc !important;
+        text-decoration: none;
+        font-size: 17px;
+        font-weight: bold;
+        font-family: 'Segoe UI', sans-serif;
+        transition: all 0.3s ease;
+        padding: 5px 10px;
+        border-radius: 8px;
+    }}
+    .nav-link:hover {{
+        color: #00f2ff !important;
+        background-color: rgba(0, 242, 255, 0.1);
+        text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+    }}
+
+    /* CSS Tarjetas de Experiencia */
     .exp-card {{
         background-image: linear-gradient(rgba(17, 34, 64, 0.85), rgba(17, 34, 64, 0.85)), url("data:image/jpg;base64,{bg_card_img if bg_card_img else ''}");
         background-size: cover; background-position: center; padding: 40px; border-radius: 20px;
-        border: 2px solid rgba(0, 242, 255, 0.3); min-height: 420px; backdrop-filter: blur(12px);
+        border: 2px solid rgba(0, 242, 255, 0.3); backdrop-filter: blur(12px);
         animation: slideIn 0.8s ease-out, fadeIn 1.2s ease-out;
+        transition: transform 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
     }}
     .exp-card:hover {{
-        transform: scale(1.03); border: 2px solid #00f2ff; box-shadow: 0 0 35px rgba(0, 242, 255, 0.5);
-        background-image: linear-gradient(rgba(17, 34, 64, 0.75), rgba(17, 34, 64, 0.75)), url("data:image/jpg;base64,{bg_card_img if bg_card_img else ''}");
+        transform: scale(1.02); border: 2px solid #00f2ff; box-shadow: 0 0 35px rgba(0, 242, 255, 0.5);
     }}
+    
+    /* CSS Tags de Habilidades */
     .skill-tag {{
         background: rgba(0, 242, 255, 0.1); border: 1px solid #00f2ff; padding: 6px 14px; 
         border-radius: 15px; display: inline-block; margin: 5px; font-size: 14px;
@@ -177,216 +158,103 @@ st.markdown(f"""
         font-size: 12px; font-weight: bold; text-align: center; z-index: 1000; box-shadow: 0 0 15px rgba(0, 242, 255, 0.6);
         border: 1px solid #00f2ff; white-space: normal; line-height: 1.4;
     }}
-    div.stButton > button {{
-        background-color: transparent !important; 
-        border: none !important; 
-        color: #00f2ff !important;
-        font-size: 24px !important; 
-        font-weight: bold !important; 
-        transition: all 0.3s ease !important; 
-        width: 100%;
-        outline: none !important;
-    }}
-
-    div.stButton > button:hover, 
-    div.stButton > button:active {{ 
-        transform: scale(1.15) !important; 
-        color: white !important; 
-        text-shadow: 0 0 15px #00f2ff !important;
-        background-color: transparent !important; 
-    }}
-
-    div.stButton > button:focus {{
-        color: #00f2ff !important;
-        box-shadow: none !important;
-        outline: none !important;
-    }}
-    h1, h2, h3 {{ color: #00f2ff !important; font-family: 'Segoe UI', sans-serif; }}
     </style>
-    """, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
-# --- 6. NAVEGACIÓN Y HEADER ---
+# --- 5. SOCIAL HEADER ---
 st.markdown(f"""
-<div class="social-header">
+<div style="display: flex; justify-content: flex-end; gap: 25px; padding: 10px 20px 0 0; flex-wrap: wrap;">
     <a href="https://www.linkedin.com/in/carlos-e-soto-v%C3%A1squez-8366b3241" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" class="icon-color-hover">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" style="width: 32px; transition: transform 0.3s ease;">
     </a>
     <a href="mailto:sotovasquezcarlos1614@gmail.com">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" class="icon-color-hover">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" style="width: 32px; transition: transform 0.3s ease;">
     </a>
     <a href="https://www.instagram.com/" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" class="icon-color-hover">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" style="width: 32px; transition: transform 0.3s ease;">
     </a>
     <a href="https://www.facebook.com/" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" class="icon-color-hover">
+        <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" style="width: 32px; transition: transform 0.3s ease;">
     </a>
 </div>
-
-<div class="header-left">Mi Portafolio</div>
-
-<style>
-    .social-header {{
-        display: flex;
-        justify-content: flex-end;
-        gap: 25px;
-        padding: 10px 20px 0 0;
-        flex-wrap: wrap;
-    }}
-    .icon-color-hover {{
-        width: 32px;
-        transition: transform 0.3s ease;
-    }}
-    .icon-color-hover:hover {{
-        transform: scale(1.2);
-        filter: drop-shadow(0 0 8px rgba(0, 242, 255, 0.8));
-    }}
-    
-    .header-left {{
-        position: fixed;
-        top: 25px;  
-        left: 25px;
-        color: white;
-        font-weight: bold;
-        font-size: 24px; 
-        z-index: 9999;
-        font-family: 'Segoe UI', sans-serif;
-        text-shadow: 0 0 5px rgba(0,0,0,0.5);
-    }}
-
-    @media (max-width: 640px) {{
-        .social-header {{
-            justify-content: flex-end;
-            gap: 12px;
-            padding-right: 10px;
-        }}
-        .icon-color-hover {{
-            width: 24px;
-        }}
-        .profile-pic {{
-            width: 120px;
-            height: 120px; 
-            border-radius: 50%; 
-            border: 3px solid #00f2ff; 
-            box-shadow: 0 0 15px #00f2ff; 
-            display: block; 
-            margin: 15px auto;
-        }}
-        .header-left {{
-            top: 15px; 
-            left: 15px;
-            font-size: 18px; 
-        }}
-    }}
-</style>
+<div style="position: fixed; top: 25px; left: 25px; color: white; font-weight: bold; font-size: 24px; z-index: 9999; font-family: 'Segoe UI', sans-serif; text-shadow: 0 0 5px rgba(0,0,0,0.5);">Mi Portafolio</div>
 """, unsafe_allow_html=True)
 
-# --- ENCABEZADO LIMPIO Y PROFESIONAL ---
-# Definimos el CSS primero
+# --- 6. MENÚ DE NAVEGACIÓN ---
 st.markdown("""
-<style>
-    .hero-container {
-        padding: 20px 0px;
-        text-align: left;
-    }
-    .header-group {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        margin-bottom: 10px;
-    }
-    .hero-profile-pic {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        background-size: cover;
-        background-position: center;
-        border: 3px solid #00f2ff;
-        box-shadow: 0 0 20px #00f2ff;
-        transition: transform 0.3s ease;
-        cursor: pointer;
-    }
-    .hero-profile-pic:hover {
-        transform: scale(1.15);
-    }
-    .badge {
-        background-color: rgba(17, 34, 64, 0.8);
-        border: 1px solid #00f2ff;
-        color: white;
-        padding: 5px 15px;
-        border-radius: 20px;
-        font-size: 14px;
-        font-weight: bold;
-    }
-    .salute {
-        font-size: 50px;
-        font-weight: 900;
-        color: white;
-        margin: 10px 0px;
-        font-family: 'Segoe UI', sans-serif;
-    }
-    .experience-para {
-        font-size: 19px;
-        line-height: 1.6;
-        color: #f0f0f0;
-        max-width: 800px;
-        font-family: 'Segoe UI', sans-serif;
-    }
-    .highlight {
-        color: #fffd8d;
-        font-weight: bold;
-    }
-</style>
-""", unsafe_allow_html=True)
-
-# Ahora renderizamos el contenido
-st.markdown(f"""
-<div class="hero-container">
-    <div class="header-group">
-        <div class="hero-profile-pic" style="background-image: url('data:image/jpeg;base64,{perfil_img}');"></div>
-        <div class="badge">Disponible para trabajar</div>
-    </div>
-    <div class="salute">Hey, soy Carlos Soto</div>
-    <div class="experience-para">
-        <span class="highlight">+4 años de experiencia</span>. 
-        Estudiante de <span class="highlight">Ingeniería en Ciberseguridad</span> y Auditoría Informática 
-        de Santiago de Chile. Especializado en el área de <span class="highlight">soporte técnico, infraestructura TI</span> 
-        y gestión de identidades (IAM). Apasionado por crear soluciones seguras que generen valor real.
-    </div>
+<div class="nav-bar">
+    <a href="#experiencia" class="nav-link">Experiencia</a>
+    <a href="#educacion" class="nav-link">Educación</a>
+    <a href="#habilidades" class="nav-link">Habilidades Técnicas</a>
+    <a href="#certificados" class="nav-link">Certificados y Cursos</a>
+    <a href="#sobre-mi" class="nav-link">Sobre mí</a>
 </div>
 """, unsafe_allow_html=True)
 
-# --- 7. SECCIÓN EXPERIENCIA ---
-st.markdown("<br><br>", unsafe_allow_html=True)
-
-# Título Único con ícono de Escudo Proactivo
+# --- 7. HERO SECTION (Cabecera) ---
 st.markdown(f"""
-    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 25px; padding-left: 10px;">
+    <style>
+    .hero-container {{ padding: 0px 0px 40px 10px; text-align: left; }}
+    .header-group {{ display: flex; align-items: center; gap: 20px; margin-bottom: 10px; }}
+    .hero-profile-pic {{
+        width: 120px; height: 120px; border-radius: 50%;
+        background-size: 180%; background-position: 70% 20%; background-repeat: no-repeat;
+        border: 3px solid #00f2ff; box-shadow: 0 0 20px #00f2ff;
+        transition: transform 0.3s ease; cursor: pointer;
+    }}
+    .hero-profile-pic:hover {{ transform: scale(1.15); }}
+    .badge {{
+        background-color: rgba(17, 34, 64, 0.8); border: 1px solid #00f2ff;
+        color: white; padding: 5px 15px; border-radius: 20px; font-size: 14px; font-weight: bold;
+    }}
+    .salute {{ font-size: 50px; font-weight: 900; color: white; margin: 10px 0px; font-family: 'Segoe UI', sans-serif; }}
+    .experience-para {{ font-size: 19px; line-height: 1.6; color: #f0f0f0; max-width: 800px; font-family: 'Segoe UI', sans-serif; }}
+    .highlight {{ color: #fffd8d; font-weight: bold; }}
+    @media (max-width: 640px) {{ .salute {{ font-size: 35px; }} }}
+    </style>
+
+    <div class="hero-container">
+        <div class="header-group">
+            <div class="hero-profile-pic" style="background-image: url('data:image/jpeg;base64,{perfil_img}');"></div>
+            <div class="badge">Disponible para trabajar</div>
+        </div>
+        <div class="salute">Hey, soy Carlos Soto</div>
+        <div class="experience-para">
+            <span class="highlight">+4 años de experiencia</span>. 
+            Estudiante de <span class="highlight">Ingeniería en Ciberseguridad</span> y Auditoría Informática 
+            de Santiago de Chile cl. Especializado en el área de <span class="highlight">soporte técnico, infraestructura TI</span> 
+            y gestión de identidades (IAM). Apasionado por crear soluciones seguras que generen valor real.
+        </div>
+    </div>
+""", unsafe_allow_html=True)
+
+# --- 8. SECCIÓN EXPERIENCIA (Recuadros apilados) ---
+# Nota: ID="experiencia" agregado aquí para el ancla del menú
+st.markdown(f"""
+    <div id="experiencia" style="display: flex; align-items: center; gap: 12px; margin-bottom: 25px; padding-left: 10px;">
         <img src="https://cdn-icons-png.flaticon.com/512/2092/2092204.png" width="35" height="35" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
         <h2 style="margin: 0; color: #00f2ff; font-size: 32px; font-family: 'Segoe UI', sans-serif;">Experiencia</h2>
     </div>
 """, unsafe_allow_html=True)
 
-# Bucle para mostrar las 3 experiencias apiladas verticalmente
 for exp in experiencias:
-    # Agregamos un pequeño margen a cada viñeta para que se lea mejor
     puntos_html = "".join([f"<li style='margin-bottom: 8px;'>{p}</li>" for p in exp['puntos']])
-    
-    # Dibujamos el recuadro. Usamos min-height: auto para que el recuadro 
-    # no quede con espacios vacíos gigantes y se adapte al tamaño del texto.
     st.markdown(f"""
     <div class="exp-card" style="margin-bottom: 35px; min-height: auto; padding: 35px;">
-        <h2 style='text-align: left; margin-top: 0; font-size: 26px;'>{exp['titulo']}</h2>
+        <h2 style='text-align: left; margin-top: 0; font-size: 26px; color: #00f2ff;'>{exp['titulo']}</h2>
         <p style='color:#00f2ff; font-size: 18px; text-align: left; margin-bottom: 15px;'><b>{exp['periodo']}</b></p>
         <ul style='font-size: 17px; line-height: 1.6; color: #f0f0f0; text-align: left; margin: 0;'>{puntos_html}</ul>
     </div>
     """, unsafe_allow_html=True)
-# --- 8. EDUCACIÓN Y HABILIDADES ---
+
+# --- 9. EDUCACIÓN Y HABILIDADES ---
 st.markdown("---")
 c1, c2 = st.columns(2)
 
 with c1:
+    # ID="educacion" agregado
     st.markdown(f"""
-            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+            <div id="educacion" style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
                 <img src="https://cdn-icons-png.flaticon.com/512/3135/3135810.png" width="40" height="40" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
                 <span style="color: #00f2ff; font-size: 28px; font-weight: bold; font-family: 'Segoe UI', sans-serif;">Educación</span>
             </div>
@@ -394,8 +262,10 @@ with c1:
     st.write("**Ingeniería en Ciberseguridad y Auditoría Informática**")
     st.write("Universidad San Sebastián (03/2022 - Presente)")
     st.markdown("<br>", unsafe_allow_html=True)
+    
+    # ID="certificados" agregado
     st.markdown(f"""
-            <div style="display: flex; align-items: center; gap: 12px; margin-top: 20px; margin-bottom: 10px;">
+            <div id="certificados" style="display: flex; align-items: center; gap: 12px; margin-top: 20px; margin-bottom: 10px;">
                 <img src="https://cdn-icons-png.flaticon.com/512/2436/2436633.png" width="40" height="40" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
                 <span style="color: #00f2ff; font-size: 28px; font-weight: bold; font-family: 'Segoe UI', sans-serif;">Certificados y Cursos</span>
             </div>
@@ -405,33 +275,33 @@ with c1:
         st.write(f"• {cert}")
 
 with c2:
-    icono_datos = icon_habilidades_img if icon_habilidades_img else ""
+    # ID="habilidades" agregado
     st.markdown(f"""
-        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+        <div id="habilidades" style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
           <img src="https://cdn-icons-png.flaticon.com/512/2092/2092663.png" width="45" height="45" style="vertical-align: middle; filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
             <span style="color: #00f2ff; font-size: 28px; font-weight: bold;">Habilidades Técnicas</span>
         </div>
     """, unsafe_allow_html=True)
-    
     html_habilidades = "".join([f'<span class="skill-tag" data-description="{desc}">{nombre}</span> ' for nombre, desc in habilidades.items()])
     st.markdown(html_habilidades, unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 st.markdown("---")
 
-# --- 9. TEXTO DE PERFIL / SOBRE MÍ ---
+# --- 10. TEXTO DE PERFIL / SOBRE MÍ ---
 col_texto, col_img = st.columns([1.4, 1], vertical_alignment="center")
 
 with col_texto:
+    # ID="sobre-mi" agregado
     st.markdown(f"""
-        <div id="seccion-sobre-mi" style="display: flex; justify-content: flex-start; align-items: center; gap: 12px; margin-bottom: 15px; padding-left: 5px;">
+        <div id="sobre-mi" style="display: flex; justify-content: flex-start; align-items: center; gap: 12px; margin-bottom: 15px; padding-left: 5px;">
             <img src="https://cdn-icons-png.flaticon.com/512/1000/1000997.png" width="38" height="38" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
             <h2 style="margin: 0; color: #00f2ff; text-align: left; font-size: 32px;">Sobre Mí</h2>
         </div>
     """, unsafe_allow_html=True)
 
     st.markdown("""
-        <div class="perfil-texto" style="font-size: 17px; line-height: 1.6; text-align: justify; padding: 25px; background: rgba(17, 34, 64, 0.6); border-radius: 15px; border: 1px solid rgba(0, 242, 255, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin: 0;">
+        <div style="font-size: 17px; line-height: 1.6; text-align: justify; padding: 25px; background: rgba(17, 34, 64, 0.6); border-radius: 15px; border: 1px solid rgba(0, 242, 255, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin: 0; transition: transform 0.4s ease;">
             Soy un joven de 25 años profundamente apasionado por la tecnología y la ciberseguridad. Actualmente me encuentro cursando mi <b style="color: #fffd8d;">último año de la carrera de Ingeniería en Ciberseguridad y Auditoría Informática</b>. 
             <br><br>
             Me considero una persona proactiva y en constante aprendizaje; disfruto expandiendo mis conocimientos analíticos y técnicos, explorando siempre nuevas herramientas y metodologías dentro del mundo de la seguridad de la información. Cuando me alejo de las pantallas, <b style="color: #fffd8d;">mi otra gran pasión es el fútbol</b>, un deporte que disfruto muchísimo y que me ayuda a mantener un buen equilibrio, liberar estrés y aplicar el valor del trabajo en equipo en mi día a día.
