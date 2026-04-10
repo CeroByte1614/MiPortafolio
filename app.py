@@ -188,18 +188,34 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# --- 7. HERO SECTION (Cabecera) ---
+# --- # --- 7. HERO SECTION (Cabecera) ---
 st.markdown(f"""
     <style>
     .hero-container {{ padding: 0px 0px 40px 10px; text-align: left; }}
     .header-group {{ display: flex; align-items: center; gap: 20px; margin-bottom: 10px; }}
+    
+    /* Configuración de tu foto de perfil */
     .hero-profile-pic {{
         width: 120px; height: 120px; border-radius: 50%;
-        background-size: 180%; background-position: 70% 20%; background-repeat: no-repeat;
+        background-image: url('data:image/jpeg;base64,{perfil_img}');
+        background-size: 180%; 
+        
+        /* Ajustamos este valor (40%) para mover tu rostro más al centro. Si necesitas moverlo más, cambia el 40% por 30% o 50% */
+        background-position: 40% 20%; 
+        background-repeat: no-repeat;
         border: 3px solid #00f2ff; box-shadow: 0 0 20px #00f2ff;
-        transition: transform 0.3s ease; cursor: pointer;
+        
+        /* Preparamos la animación */
+        transition: transform 0.4s ease, box-shadow 0.4s ease; 
+        cursor: pointer;
     }}
-    .hero-profile-pic:hover {{ transform: scale(1.15); }}
+    
+    /* EFECTO HOVER: Agranda un 20% (1.2) y aumenta el brillo */
+    .hero-profile-pic:hover {{ 
+        transform: scale(1.2); 
+        box-shadow: 0 0 35px #00f2ff;
+    }}
+    
     .badge {{
         background-color: rgba(17, 34, 64, 0.8); border: 1px solid #00f2ff;
         color: white; padding: 5px 15px; border-radius: 20px; font-size: 14px; font-weight: bold;
@@ -212,7 +228,7 @@ st.markdown(f"""
 
     <div class="hero-container">
         <div class="header-group">
-            <div class="hero-profile-pic" style="background-image: url('data:image/jpeg;base64,{perfil_img}');"></div>
+            <div class="hero-profile-pic"></div>
             <div class="badge">Disponible para trabajar</div>
         </div>
         <div class="salute">Hey, soy Carlos Soto</div>
