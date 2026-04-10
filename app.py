@@ -28,7 +28,7 @@ img_sobre_mi = get_base64('imagensobremi.jpg')
 # --- 3. DATOS ---
 experiencias = [
     {
-        "titulo": "Service Desk Analyst | Vector (Salcobrand)",
+        "titulo": "Service Desk Analyst",
         "periodo": "08/2025 – Presente",
         "puntos": [
             "Gestión de identidades (IAM) en Azure AD (Entra ID) y Active Directory, administrando accesos y políticas de seguridad.",
@@ -38,7 +38,7 @@ experiencias = [
         ]
     },
     {
-        "titulo": "Soporte Técnico e Infraestructura IT | UpcomDTS",
+        "titulo": "Soporte Técnico e Infraestructura IT",
         "periodo": "02/2023 – 07/2025",
         "puntos": [
             "Administración de seguridad en Microsoft 365, configurando controles de acceso e identidades en entornos híbridos.",
@@ -47,7 +47,7 @@ experiencias = [
         ]
     },
     {
-        "titulo": "Encargado de Computación | Red de Colegios SIP",
+        "titulo": "Encargado de Computación",
         "periodo": "01/2022 – 01/2023",
         "puntos": [
             "Gestión y segmentación de red segura mediante la configuración de Firewalls y Switches (L2/L3).",
@@ -316,7 +316,6 @@ with col_texto:
             <br><br>
             Me considero una persona proactiva y en constante aprendizaje; disfruto expandiendo mis conocimientos analíticos y técnicos, explorando siempre nuevas herramientas y metodologías dentro del mundo de la seguridad de la información. Cuando me alejo de las pantallas, <b style="color: #fffd8d;">mi otra gran pasión es el fútbol</b>, un deporte que disfruto muchísimo y que me ayuda a mantener un buen equilibrio, liberar estrés y aplicar el valor del trabajo en equipo en mi día a día.
             <br><br>
-            A lo largo de mi trayectoria, he consolidado más de 4 años de experiencia en soporte técnico, infraestructura TI y gestión de identidades (IAM). Me especializo en el endurecimiento de sistemas (Hardening), redes bajo el modelo OSI y respuesta a incidentes (N1/N2). Mi objetivo profesional es seguir enfrentando nuevos desafíos e implementar soluciones que protejan los activos críticos bajo los más altos estándares operativos.
         </div>
     """, unsafe_allow_html=True)
 
