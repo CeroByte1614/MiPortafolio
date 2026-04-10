@@ -83,41 +83,31 @@ tarjeta_b64 = bg_card_img if bg_card_img else ""
 
 st.markdown(f"""
     <style>
-    /* Ocultamos las barras de Streamlit y quitamos su altura */
-    header {{visibility: hidden !important; height: 0px !important;}}
-    
-    /* ACÁ ESTÁ EL TRUCO: Forzamos a que el contenedor principal casi no tenga margen arriba */
+    /* Ocultar elementos por defecto de Streamlit y el margen superior */
+    header {{visibility: hidden !important;}}
     .main .block-container {{ padding-top: 2rem !important; padding-bottom: 0rem; z-index: 10; position: relative; }}
     #MainMenu, footer {{visibility: hidden !important;}}
     
-    /* Pseudo-elemento para el fondo animado */
-    .stApp::before {{
-        content: "";
-        position: fixed; 
-        top: 0; left: 0; width: 100vw; height: 100vh;
-        z-index: -1; 
-        background-image: linear-gradient(rgba(5, 10, 48, 0.95), rgba(0, 0, 0, 0.95)), url("data:image/jpeg;base64,{fondo_b64}");
-        background-size: 150vw auto; 
-        background-position: left center;
-        background-repeat: no-repeat;
-        animation: deslizarFondo 30s linear infinite alternate;
+    /* FONDO PRINCIPAL: Directo al .stApp (como funcionaba antes) pero con espacio para moverse */
+    .stApp {{
+        background-image: linear-gradient(rgba(5, 10, 48, 0.95), rgba(0, 0, 0, 0.95)), url("data:image/jpeg;base64,{fondo_b64}") !important;
+        background-size: 200% 200% !important; /* Lo hacemos el doble de grande para que pueda "viajar" */
+        background-repeat: no-repeat !important;
+        color: white !important;
+        animation: moverFondo 30s linear infinite alternate !important;
     }}
     
-    @keyframes deslizarFondo {{
-        0% {{ background-position: left center; }}
-        100% {{ background-position: right center; }}
-    }}
-
-    .stApp {{
-        color: white !important;
-        background-color: transparent !important; 
+    /* Animación de paneo horizontal sin el !important que a veces rompen los navegadores */
+    @keyframes moverFondo {{
+        0% {{ background-position: 0% 50%; }}
+        100% {{ background-position: 100% 50%; }}
     }}
 
     @media (max-width: 640px) {{
-        .stApp::before {{
-            background-size: cover;
-            background-position: center center;
-            animation: none; 
+        .stApp {{
+            background-size: cover !important; 
+            background-position: center center !important; 
+            animation: none !important; /* Apagado en celular */
         }}
         .main .block-container {{ padding-top: 1rem !important; }}
     }}
@@ -125,7 +115,7 @@ st.markdown(f"""
     @keyframes fadeIn {{ 0% {{ opacity: 0; }} 100% {{ opacity: 1; }} }}
     @keyframes slideIn {{ 0% {{ transform: translateX(100px); opacity: 0; }} 100% {{ transform: translateX(0); opacity: 1; }} }}
     
-    /* CSS Nav Menu - Redujimos el margen superior para acercarlo a los íconos */
+    /* CSS Nav Menu */
     .nav-bar {{
         display: flex; justify-content: center; flex-wrap: wrap; gap: 25px;
         margin-top: 5px; margin-bottom: 35px; padding-bottom: 15px;
