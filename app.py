@@ -25,7 +25,6 @@ perfil_img = get_base64('imagencarlos.jpg')
 bg_card_img = get_base64('imagenciberseguridad2.jpg')
 icon_habilidades_img = get_base64(os.path.join(ruta_base, 'iconohabilidades.png'))
 img_sobre_mi = get_base64('imagensobremi.jpg')
-img_sobre_mi = get_base64('imagentextosobremi.jpg')
 
 # --- 3. DATOS ---
 experiencias = [
