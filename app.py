@@ -366,49 +366,20 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# Columnas: Botón Anterior | Tarjeta de Experiencia | Botón Siguiente
-col_prev, col_card, col_next = st.columns([1, 8, 1], vertical_alignment="center")
-
-with col_prev:
-    st.markdown("""
-        <div style="display: flex; justify-content: flex-end; align-items: center; height: 100%; min-width: 80px;">
-            <style>
-                div.stButton > button[key="prev_btn"] {
-                    background-color: transparent !important;
-                    border: none !important;
-                    color: #00f2ff !important;
-                    font-size: 20px !important;
-                    font-weight: bold !important;
-                    padding: 0 !important;
-                }
-            </style>
-    """, unsafe_allow_html=True)
+# Bucle para mostrar las 3 experiencias apiladas verticalmente
+for exp in experiencias:
+    # Agregamos un pequeño margen a cada viñeta para que se lea mejor
+    puntos_html = "".join([f"<li style='margin-bottom: 8px;'>{p}</li>" for p in exp['puntos']])
     
-    if st.button("❮ Anterior", key="prev_btn"):
-        st.session_state.exp_index = (st.session_state.exp_index - 1) % len(experiencias)
-        st.session_state.last_refresh = time.time()
-        st.rerun()
-    st.markdown("</div>", unsafe_allow_html=True)
-
-with col_card:
-    exp = experiencias[st.session_state.exp_index]
-    puntos_html = "".join([f"<li>{p}</li>" for p in exp['puntos']])
-    
-    st.container(key=f"card_{st.session_state.exp_index}").markdown(f"""
-    <div class="exp-card">
-        <h2 style='text-align: left;'>{exp['titulo']}</h2>
-        <p style='color:#00f2ff; font-size: 18px; text-align: left;'><b>{exp['periodo']}</b></p>
-        <ul style='font-size: 17px; line-height: 1.6; color: #f0f0f0; text-align: left;'>{puntos_html}</ul>
+    # Dibujamos el recuadro. Usamos min-height: auto para que el recuadro 
+    # no quede con espacios vacíos gigantes y se adapte al tamaño del texto.
+    st.markdown(f"""
+    <div class="exp-card" style="margin-bottom: 35px; min-height: auto; padding: 35px;">
+        <h2 style='text-align: left; margin-top: 0; font-size: 26px;'>{exp['titulo']}</h2>
+        <p style='color:#00f2ff; font-size: 18px; text-align: left; margin-bottom: 15px;'><b>{exp['periodo']}</b></p>
+        <ul style='font-size: 17px; line-height: 1.6; color: #f0f0f0; text-align: left; margin: 0;'>{puntos_html}</ul>
     </div>
     """, unsafe_allow_html=True)
-
-with col_next:
-    st.markdown('<div style="text-align: left; white-space: nowrap;">', unsafe_allow_html=True)
-    if st.button("Siguiente ❯", key="next_btn"):
-        st.session_state.exp_index = (st.session_state.exp_index + 1) % len(experiencias)
-        st.session_state.last_refresh = time.time()
-        st.rerun()
-    st.markdown('</div>', unsafe_allow_html=True)
 # --- 8. EDUCACIÓN Y HABILIDADES ---
 st.markdown("---")
 c1, c2 = st.columns(2)
@@ -464,6 +435,16 @@ with col_texto:
             Soy un joven de 25 años profundamente apasionado por la tecnología y la ciberseguridad. Actualmente me encuentro cursando mi <b style="color: #fffd8d;">último año de la carrera de Ingeniería en Ciberseguridad y Auditoría Informática</b>. 
             <br><br>
             Me considero una persona proactiva y en constante aprendizaje; disfruto expandiendo mis conocimientos analíticos y técnicos, explorando siempre nuevas herramientas y metodologías dentro del mundo de la seguridad de la información. Cuando me alejo de las pantallas, <b style="color: #fffd8d;">mi otra gran pasión es el fútbol</b>, un deporte que disfruto muchísimo y que me ayuda a mantener un buen equilibrio, liberar estrés y aplicar el valor del trabajo en equipo en mi día a día.
+            <br><br>
+            A lo largo de mi trayectoria, he consolidado más de 4 años de experiencia en soporte técnico, infraestructura TI y gestión de identidades (IAM). Me especializo en el endurecimiento de sistemas (Hardening), redes bajo el modelo OSI y respuesta a incidentes (N1/N2). Mi objetivo profesional es seguir enfrentando nuevos desafíos e implementar soluciones que protejan los activos críticos bajo los más altos estándares operativos.
+        </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+        <div class="perfil-texto" style="font-size: 17px; line-height: 1.6; text-align: justify; padding: 25px; background: rgba(17, 34, 64, 0.6); border-radius: 15px; border: 1px solid rgba(0, 242, 255, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin: 0;">
+            Soy un joven de 25 años profundamente apasionado por la tecnología y la ciberseguridad. Actualmente me encuentro cursando mi <b>último año de la carrera de Ingeniería en Ciberseguridad y Auditoría Informática</b>. 
+            <br><br>
+            Me considero una persona proactiva y en constante aprendizaje; disfruto expandiendo mis conocimientos analíticos y técnicos, explorando siempre nuevas herramientas y metodologías dentro del mundo de la seguridad de la información. Cuando me alejo de las pantallas, <b>mi otra gran pasión es el fútbol</b>, un deporte que disfruto muchísimo y que me ayuda a mantener un buen equilibrio, liberar estrés y aplicar el valor del trabajo en equipo en mi día a día.
             <br><br>
         </div>
     """, unsafe_allow_html=True)
