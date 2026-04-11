@@ -76,14 +76,14 @@ habilidades = {
     "Normativas y Frameworks": "Conocimiento académico en ISO 27001 y NIST Cybersecurity Framework."
 }
 
-# --- 4. ESTILOS CSS GENERALES Y FONDO ANIMADO ---
+# --- 4. ESTILOS CSS GENERALES Y REGLAS RESPONSIVES ---
 st.markdown(f"""
     <style>
     header {{visibility: hidden !important;}}
     #MainMenu, footer {{visibility: hidden !important;}}
     .main .block-container {{ padding-top: 2rem !important; padding-bottom: 0rem; z-index: 10; position: relative; }}
     
-    /* Hace transparente la capa de la app para ver el fondo */
+    /* Fondo principal */
     .stApp {{
         background: transparent !important;
         color: white !important;
@@ -105,14 +105,6 @@ st.markdown(f"""
     @keyframes deslizarFondo {{
         0% {{ background-position: left center; }}
         100% {{ background-position: right center; }}
-    }}
-
-    @media (max-width: 640px) {{
-        body::before {{
-            background-size: cover;
-            background-position: center center;
-            animation: none;
-        }}
     }}
 
     /* CSS Nav Menu */
@@ -140,9 +132,8 @@ st.markdown(f"""
         transform: scale(1.02); border: 2px solid #00f2ff; box-shadow: 0 0 35px rgba(0, 242, 255, 0.5);
     }}
     
-    /* CSS Tags de Habilidades (CORREGIDO) */
+    /* CSS Tags de Habilidades */
     .habilidades-container {{
-        /* Necesario para que el tooltip no se corte */
         position: relative; 
         z-index: 20; 
     }}
@@ -157,8 +148,6 @@ st.markdown(f"""
         background: rgba(255, 255, 255, 0.95); color: #050a30; padding: 10px; border-radius: 8px; width: 220px;
         font-size: 13px; font-weight: bold; text-align: center; z-index: 1000; box-shadow: 0 0 15px rgba(0, 242, 255, 0.6);
         border: 1px solid #00f2ff; white-space: normal; line-height: 1.4;
-        /* Pequeña flecha apuntando hacia abajo */
-        border-bottom-color: transparent; 
     }}
 
     /* EFECTO ZOOM PARA "SOBRE MÍ" */
@@ -172,12 +161,56 @@ st.markdown(f"""
         border-color: #00f2ff !important;
         z-index: 50;
     }}
+
+    /* ====================================================
+       MEDIA QUERIES PARA DISPOSITIVOS MÓVILES (Celulares)
+       ==================================================== */
+    @media (max-width: 768px) {{
+        body::before {{
+            background-size: cover;
+            background-position: center center;
+            animation: none;
+        }}
+        
+        /* Redes Sociales centradas y sin margen negativo */
+        .social-header-container {{
+            justify-content: center !important;
+            margin-top: 10px !important;
+            margin-bottom: 20px !important;
+        }}
+        
+        /* Menú de navegación más compacto */
+        .nav-bar {{ gap: 10px; margin-bottom: 25px; padding-bottom: 10px; }}
+        .nav-link {{ font-size: 14px; padding: 4px 8px; }}
+        
+        /* Sección Hero (Saludo y foto) */
+        .header-group {{ flex-direction: column !important; align-items: flex-start !important; gap: 15px !important; }}
+        .hero-profile-pic {{ width: 90px !important; height: 90px !important; border-width: 2px !important; }}
+        .salute {{ font-size: 32px !important; line-height: 1.2 !important; }}
+        .experience-para {{ font-size: 16px !important; text-align: justify !important; }}
+        
+        /* Tarjetas de Experiencia */
+        .exp-card {{ padding: 20px !important; margin-bottom: 25px !important; }}
+        .exp-card h2 {{ font-size: 22px !important; }}
+        .exp-card p {{ font-size: 15px !important; }}
+        .exp-card ul {{ font-size: 15px !important; padding-left: 20px !important; }}
+        
+        /* Títulos de Secciones */
+        .section-title {{ font-size: 22px !important; }}
+        
+        /* Imagen sobre mí adaptada */
+        .img-sobre-mi-container {{ padding-top: 15px !important; }}
+        
+        /* Reducción de tooltips en móvil para que no se salgan de pantalla */
+        .skill-tag:hover::after {{ width: 180px; font-size: 12px; left: 0%; transform: translateX(-20%); }}
+    }}
     </style>
 """, unsafe_allow_html=True)
 
 # --- 5. SOCIAL HEADER ---
+# Se agregó la clase 'social-header-container' para controlarla en móvil
 st.markdown(f"""
-<div style="display: flex; justify-content: flex-end; gap: 25px; padding: 0; margin-top: -40px; flex-wrap: wrap;">
+<div class="social-header-container" style="display: flex; justify-content: flex-end; gap: 25px; padding: 0; margin-top: -40px; flex-wrap: wrap;">
     <a href="https://www.linkedin.com/in/carlos-e-soto-v%C3%A1squez-8366b3241" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" style="width: 32px; transition: transform 0.3s ease;">
     </a>
@@ -198,8 +231,8 @@ st.markdown("""
 <div class="nav-bar">
     <a href="#experiencia" class="nav-link">Experiencia</a>
     <a href="#educacion" class="nav-link">Educación</a>
-    <a href="#habilidades" class="nav-link">Habilidades Técnicas</a>
-    <a href="#certificados" class="nav-link">Certificados y Cursos</a>
+    <a href="#habilidades" class="nav-link">Habilidades</a>
+    <a href="#certificados" class="nav-link">Certificados</a>
     <a href="#sobre-mi" class="nav-link">Sobre mí</a>
 </div>
 """, unsafe_allow_html=True)
@@ -223,7 +256,6 @@ st.markdown(f"""
     .salute {{ font-size: 50px; font-weight: 900; color: white; margin: 10px 0px; font-family: 'Segoe UI', sans-serif; }}
     .experience-para {{ font-size: 19px; line-height: 1.6; color: #f0f0f0; max-width: 800px; font-family: 'Segoe UI', sans-serif; }}
     .highlight {{ color: #fffd8d; font-weight: bold; }}
-    @media (max-width: 640px) {{ .salute {{ font-size: 35px; }} }}
     </style>
 
     <div class="hero-container">
@@ -245,7 +277,7 @@ st.markdown(f"""
 st.markdown(f"""
     <div id="experiencia" style="display: flex; align-items: center; gap: 12px; margin-bottom: 25px; padding-left: 10px;">
         <img src="https://cdn-icons-png.flaticon.com/512/2092/2092204.png" width="35" height="35" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
-        <h2 style="margin: 0; color: #00f2ff; font-size: 32px; font-family: 'Segoe UI', sans-serif;">Experiencia</h2>
+        <h2 class="section-title" style="margin: 0; color: #00f2ff; font-size: 32px; font-family: 'Segoe UI', sans-serif;">Experiencia</h2>
     </div>
 """, unsafe_allow_html=True)
 
@@ -267,7 +299,7 @@ with c1:
     st.markdown(f"""
             <div id="educacion" style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
                 <img src="https://cdn-icons-png.flaticon.com/512/3135/3135810.png" width="40" height="40" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
-                <span style="color: #00f2ff; font-size: 28px; font-weight: bold; font-family: 'Segoe UI', sans-serif;">Educación</span>
+                <span class="section-title" style="color: #00f2ff; font-size: 28px; font-weight: bold; font-family: 'Segoe UI', sans-serif;">Educación</span>
             </div>
         """, unsafe_allow_html=True)
     st.write("**Ingeniería en Ciberseguridad y Auditoría Informática**")
@@ -277,7 +309,7 @@ with c1:
     st.markdown(f"""
             <div id="certificados" style="display: flex; align-items: center; gap: 12px; margin-top: 20px; margin-bottom: 10px;">
                 <img src="https://cdn-icons-png.flaticon.com/512/2436/2436633.png" width="40" height="40" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
-                <span style="color: #00f2ff; font-size: 28px; font-weight: bold; font-family: 'Segoe UI', sans-serif;">Certificados y Cursos</span>
+                <span class="section-title" style="color: #00f2ff; font-size: 28px; font-weight: bold; font-family: 'Segoe UI', sans-serif;">Certificados y Cursos</span>
             </div>
         """, unsafe_allow_html=True)
     certificados = ["NSE 1, 2 y 3 Fortinet", "Cisco Certified Network Associate (CCNA)", "Conceptos básicos de redes", "Introducción a la Ciberseguridad", "Personalización de entorno en Linux", "Licencia de conducir clase B"]
@@ -288,11 +320,10 @@ with c2:
     st.markdown(f"""
         <div id="habilidades" style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
           <img src="https://cdn-icons-png.flaticon.com/512/2092/2092663.png" width="45" height="45" style="vertical-align: middle; filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
-            <span style="color: #00f2ff; font-size: 28px; font-weight: bold;">Habilidades Técnicas</span>
+            <span class="section-title" style="color: #00f2ff; font-size: 28px; font-weight: bold;">Habilidades Técnicas</span>
         </div>
     """, unsafe_allow_html=True)
     
-    # APLICAMOS EL CONTENEDOR PARA LAS HABILIDADES
     html_habilidades = "".join([f'<span class="skill-tag" data-description="{desc}">{nombre}</span> ' for nombre, desc in habilidades.items()])
     st.markdown(f'<div class="habilidades-container">{html_habilidades}</div>', unsafe_allow_html=True)
 
@@ -306,7 +337,7 @@ with col_texto:
     st.markdown(f"""
         <div id="sobre-mi" style="display: flex; justify-content: flex-start; align-items: center; gap: 12px; margin-bottom: 15px; padding-left: 5px;">
             <img src="https://cdn-icons-png.flaticon.com/512/1000/1000997.png" width="38" height="38" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #00f2ff);">
-            <h2 style="margin: 0; color: #00f2ff; text-align: left; font-size: 32px;">Sobre Mí</h2>
+            <h2 class="section-title" style="margin: 0; color: #00f2ff; text-align: left; font-size: 32px;">Sobre Mí</h2>
         </div>
     """, unsafe_allow_html=True)
 
@@ -321,8 +352,9 @@ with col_texto:
 
 with col_img:
     if img_sobre_mi:
+        # Se agregó la clase img-sobre-mi-container
         st.markdown(f"""
-            <div style="display: flex; justify-content: center; align-items: center; height: 100%; padding-top: 50px;">
+            <div class="img-sobre-mi-container" style="display: flex; justify-content: center; align-items: center; height: 100%; padding-top: 50px;">
                 <img class="efecto-zoom" src="data:image/jpeg;base64,{img_sobre_mi}" style="width: 100%; max-width: 380px; height: auto; border-radius: 15px; border: 2px solid rgba(0, 242, 255, 0.2); box-shadow: 0 0 20px rgba(0, 242, 255, 0.1); object-fit: cover;">
             </div>
         """, unsafe_allow_html=True)
